@@ -10,10 +10,13 @@ import SwiftUI
 struct ActionsView: View {
     
     @Environment(\.colorScheme) var colorScheme
+        
+    @Binding var currSong: Song?
+    @Binding var isPaused: Bool
+    @Binding var isEnded: Bool
+    @Binding var isHearted: Bool
     
-    @State var isPaused = false
-    @State var isEnded = false
-    @State var isHearted = false
+    @ObservedObject var audio: Audio
     
     var body: some View {
         
@@ -21,8 +24,8 @@ struct ActionsView: View {
             
             if isEnded {
                 Button {
-                    print("REPEAT")
                     isEnded.toggle()
+                    audio.playSong(url: currSong?.preview_url)
                 } label: {
                     Image(systemName: "repeat")
                         .resizable()
@@ -34,10 +37,17 @@ struct ActionsView: View {
             else {
                 
                 Button {
-                    print("REPEAT")
+                    
+                    if self.isPaused {
+                        audio.playSound()
+                    } else {
+                        audio.pauseSound()
+                    }
+                    
                     isPaused.toggle()
+                    
                 } label: {
-                    Image(systemName: isPaused ? "pause.circle" : "play.circle")
+                    Image(systemName: isPaused ? "play.circle" : "pause.circle")
                         .resizable()
                         .frame(width: 30, height: 30)
                         .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
@@ -80,6 +90,13 @@ struct ActionsView: View {
 
 struct Actions_Previews: PreviewProvider {
     static var previews: some View {
-        ActionsView()
+        
+        @State var currSong: Song? = nil
+        @State var isPaused = false
+        @State var isEnded = false
+        @State var isHearted = false
+        
+        ActionsView(currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: Audio())
+
     }
 }

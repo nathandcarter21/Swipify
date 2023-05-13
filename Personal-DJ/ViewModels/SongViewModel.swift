@@ -2,38 +2,49 @@ import SwiftUI
 import AVFoundation
 
 class SongViewModel: ObservableObject {
-    @Published var currSong: Song?
+    
     var token: String
     
-    var songs: [Song] = []
+    @Published var songs: [Song] = []
     
     init(token: String) {
         self.token = token
     }
     
-    init(currSong: Song) {
-        self.currSong = currSong
+    init(songs: [Song]) {
+        self.songs = songs.reversed()
         self.token = "123"
     }
     
-    func skipSong() -> String? {
-        
-        guard self.songs.count > 1 else {
+//    func skipSong() -> String? {
+//
+//        guard self.songs.count > 1 else {
+//            return nil
+//        }
+//        let url = self.songs[1].preview_url
+//
+//        DispatchQueue.main.async {
+//            self.songs.removeFirst()
+//        }
+//
+//        return url
+//    }
+    
+    func skipSong() -> Bool {
+        if self.songs.count == 1 {
             
             DispatchQueue.main.async {
-                self.currSong = nil
+                self.songs.removeLast()
             }
             
-            return nil
+            return true
         }
-        let url = self.songs[1].preview_url
         
         DispatchQueue.main.async {
-            self.currSong = self.songs[1]
-            self.songs.removeFirst()
+            self.songs.removeLast()
         }
         
-        return url
+        return false
     }
     
     func loadSongs() {
@@ -42,7 +53,7 @@ class SongViewModel: ObservableObject {
             return
         }
                 
-        guard let url = URL(string: "https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=short_term") else {
+        guard let url = URL(string: "https://api.spotify.com/v1/me/top/tracks?limit=2&time_range=short_term") else {
             return
         }
         
@@ -70,8 +81,7 @@ class SongViewModel: ObservableObject {
                 
                 let res = try JSONDecoder().decode(TopTracksRes.self, from: data)
                 DispatchQueue.main.async {
-                    self?.songs = res.items
-                    self?.currSong = self?.songs[0]
+                    self?.songs = res.items.reversed()
                 }
             }
             catch{

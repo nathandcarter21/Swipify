@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		581647D22A0F1F0700DE758F /* SongView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581647D12A0F1F0700DE758F /* SongView2.swift */; };
 		589127B42A0ED19400CA0B0C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127B32A0ED19400CA0B0C /* App.swift */; };
 		589127B82A0ED19500CA0B0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127B72A0ED19500CA0B0C /* Assets.xcassets */; };
 		589127BB2A0ED19500CA0B0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127BA2A0ED19500CA0B0C /* Preview Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		581647D12A0F1F0700DE758F /* SongView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongView2.swift; sourceTree = "<group>"; };
 		589127B02A0ED19400CA0B0C /* Personal-DJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal-DJ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		589127B32A0ED19400CA0B0C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		589127B72A0ED19500CA0B0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				589127CB2A0EE28800CA0B0C /* SettingsView.swift */,
 				589127CD2A0F03FD00CA0B0C /* SignInView.swift */,
 				589127CF2A0F04EB00CA0B0C /* ViewSwitcher.swift */,
+				581647D12A0F1F0700DE758F /* SongView2.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				589127C52A0ED27E00CA0B0C /* SongView.swift in Sources */,
 				589127D02A0F04EB00CA0B0C /* ViewSwitcher.swift in Sources */,
 				589127CE2A0F03FD00CA0B0C /* SignInView.swift in Sources */,
+				581647D22A0F1F0700DE758F /* SongView2.swift in Sources */,
 				589127C72A0ED29D00CA0B0C /* ActionsView.swift in Sources */,
 				589127C32A0ED26D00CA0B0C /* HomeView.swift in Sources */,
 				589127DA2A0F0BCF00CA0B0C /* Audio.swift in Sources */,

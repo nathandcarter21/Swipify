@@ -21,9 +21,13 @@ class Audio: ObservableObject {
             
             let playerItem = AVPlayerItem(url: url)
             self.audioPlayer = AVPlayer(playerItem: playerItem)
-            
+                        
             self.audioPlayer?.play()
         }
+    }
+    
+    func playSound() {
+        self.audioPlayer?.play()
     }
     
     func pauseSound() {
