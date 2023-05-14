@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AccessTokenReq: Hashable, Codable {
+struct AccessTokenRes: Hashable, Codable {
     let access_token: String
     let token_type: String
     let expires_in: Int

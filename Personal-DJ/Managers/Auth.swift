@@ -12,7 +12,7 @@ class Auth: ObservableObject {
     var token: String = ""
     var codeVerifier: String?
     
-    var url = "https://accounts.spotify.com/authorize?response_type=code&client_id=815d77f6e74645738bf81edb150d456e&scope=user-top-read,user-read-private,user-read-email&redirect_uri=https://github.com/nathandcarter21&code_challenge_method=S256&code_challenge="
+    var url = "https://accounts.spotify.com/authorize?response_type=code&client_id=815d77f6e74645738bf81edb150d456e&scope=user-top-read,user-read-private,user-read-email,user-library-read,user-library-modify&redirect_uri=https://github.com/nathandcarter21&code_challenge_method=S256&code_challenge="
 
     func getUser(token: String) {
         
@@ -138,7 +138,7 @@ class Auth: ObservableObject {
 //                       print(responseJSON)
 //                   }
                 
-                let res = try JSONDecoder().decode(AccessTokenReq.self, from: data)
+                let res = try JSONDecoder().decode(AccessTokenRes.self, from: data)
                 
                 guard res.access_token != "" else {
                     return

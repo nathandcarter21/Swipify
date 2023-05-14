@@ -10,6 +10,8 @@
 		58673AF72A1155E600B2829B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AF62A1155E600B2829B /* SettingsViewModel.swift */; };
 		58673AF92A11583600B2829B /* CurrentUserRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AF82A11583600B2829B /* CurrentUserRes.swift */; };
 		58673AFB2A115B7E00B2829B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFA2A115B7E00B2829B /* User.swift */; };
+		58673AFF2A1168F000B2829B /* SaveSongReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFE2A1168F000B2829B /* SaveSongReq.swift */; };
+		58673B012A116A5F00B2829B /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673B002A116A5F00B2829B /* ActionsViewModel.swift */; };
 		589127B42A0ED19400CA0B0C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127B32A0ED19400CA0B0C /* App.swift */; };
 		589127B82A0ED19500CA0B0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127B72A0ED19500CA0B0C /* Assets.xcassets */; };
 		589127BB2A0ED19500CA0B0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127BA2A0ED19500CA0B0C /* Preview Assets.xcassets */; };
@@ -21,7 +23,7 @@
 		589127CE2A0F03FD00CA0B0C /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127CD2A0F03FD00CA0B0C /* SignInView.swift */; };
 		589127D02A0F04EB00CA0B0C /* ViewSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127CF2A0F04EB00CA0B0C /* ViewSwitcher.swift */; };
 		589127D42A0F056800CA0B0C /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D32A0F056800CA0B0C /* Auth.swift */; };
-		589127D62A0F05AF00CA0B0C /* AccessTokenReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D52A0F05AF00CA0B0C /* AccessTokenReq.swift */; };
+		589127D62A0F05AF00CA0B0C /* AccessTokenRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D52A0F05AF00CA0B0C /* AccessTokenRes.swift */; };
 		589127D82A0F065500CA0B0C /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D72A0F065500CA0B0C /* SignInViewModel.swift */; };
 		589127DA2A0F0BCF00CA0B0C /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D92A0F0BCF00CA0B0C /* Audio.swift */; };
 		589127DC2A0F0E2600CA0B0C /* SongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */; };
@@ -31,6 +33,8 @@
 		58673AF62A1155E600B2829B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		58673AF82A11583600B2829B /* CurrentUserRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserRes.swift; sourceTree = "<group>"; };
 		58673AFA2A115B7E00B2829B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		58673AFE2A1168F000B2829B /* SaveSongReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSongReq.swift; sourceTree = "<group>"; };
+		58673B002A116A5F00B2829B /* ActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
 		589127B02A0ED19400CA0B0C /* Personal-DJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal-DJ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		589127B32A0ED19400CA0B0C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		589127B72A0ED19500CA0B0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,7 +47,7 @@
 		589127CD2A0F03FD00CA0B0C /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		589127CF2A0F04EB00CA0B0C /* ViewSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSwitcher.swift; sourceTree = "<group>"; };
 		589127D32A0F056800CA0B0C /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
-		589127D52A0F05AF00CA0B0C /* AccessTokenReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenReq.swift; sourceTree = "<group>"; };
+		589127D52A0F05AF00CA0B0C /* AccessTokenRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenRes.swift; sourceTree = "<group>"; };
 		589127D72A0F065500CA0B0C /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		589127D92A0F0BCF00CA0B0C /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewModel.swift; sourceTree = "<group>"; };
@@ -60,6 +64,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58673AFC2A11654100B2829B /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				58673AF82A11583600B2829B /* CurrentUserRes.swift */,
+				589127D52A0F05AF00CA0B0C /* AccessTokenRes.swift */,
+			);
+			path = Res;
+			sourceTree = "<group>";
+		};
+		58673AFD2A1168DD00B2829B /* Req */ = {
+			isa = PBXGroup;
+			children = (
+				58673AFE2A1168F000B2829B /* SaveSongReq.swift */,
+			);
+			path = Req;
+			sourceTree = "<group>";
+		};
 		589127A72A0ED19400CA0B0C = {
 			isa = PBXGroup;
 			children = (
@@ -114,9 +135,9 @@
 		589127C82A0ED6C800CA0B0C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				58673AFD2A1168DD00B2829B /* Req */,
+				58673AFC2A11654100B2829B /* Res */,
 				589127C92A0ED6E100CA0B0C /* Song.swift */,
-				589127D52A0F05AF00CA0B0C /* AccessTokenReq.swift */,
-				58673AF82A11583600B2829B /* CurrentUserRes.swift */,
 				58673AFA2A115B7E00B2829B /* User.swift */,
 			);
 			path = Models;
@@ -137,6 +158,7 @@
 				589127D72A0F065500CA0B0C /* SignInViewModel.swift */,
 				589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */,
 				58673AF62A1155E600B2829B /* SettingsViewModel.swift */,
+				58673B002A116A5F00B2829B /* ActionsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -211,11 +233,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				589127D62A0F05AF00CA0B0C /* AccessTokenReq.swift in Sources */,
+				589127D62A0F05AF00CA0B0C /* AccessTokenRes.swift in Sources */,
 				589127C52A0ED27E00CA0B0C /* SongView.swift in Sources */,
 				589127D02A0F04EB00CA0B0C /* ViewSwitcher.swift in Sources */,
 				589127CE2A0F03FD00CA0B0C /* SignInView.swift in Sources */,
+				58673B012A116A5F00B2829B /* ActionsViewModel.swift in Sources */,
 				58673AFB2A115B7E00B2829B /* User.swift in Sources */,
+				58673AFF2A1168F000B2829B /* SaveSongReq.swift in Sources */,
 				589127C72A0ED29D00CA0B0C /* ActionsView.swift in Sources */,
 				589127C32A0ED26D00CA0B0C /* HomeView.swift in Sources */,
 				589127DA2A0F0BCF00CA0B0C /* Audio.swift in Sources */,

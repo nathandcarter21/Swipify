@@ -10,6 +10,10 @@ import SwiftUI
 struct ActionsView: View {
     
     @Environment(\.colorScheme) var colorScheme
+    
+    @State var showLikedToast = false
+    @State var showUnlikedToast = false
+
         
     @Binding var currSong: Song?
     @Binding var isPaused: Bool
@@ -17,74 +21,134 @@ struct ActionsView: View {
     @Binding var isHearted: Bool
     
     @ObservedObject var audio: Audio
+    @ObservedObject var auth: Auth
+
+    
+    var actionsViewModel = ActionsViewModel()
     
     var body: some View {
         
-        HStack {
+        ZStack {
             
-            if isEnded {
-                Button {
-                    isEnded.toggle()
-                    audio.playSong(url: currSong?.preview_url)
-                } label: {
-                    Image(systemName: "repeat")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
-                }
-            }
-            
-            else {
+            HStack {
                 
-                Button {
+                if isEnded {
+                    Button {
+                        isEnded.toggle()
+                        audio.playSong(url: currSong?.preview_url)
+                    } label: {
+                        Image(systemName: "repeat")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                    }
+                }
+                
+                else {
                     
-                    if self.isPaused {
-                        audio.playSound()
-                    } else {
-                        audio.pauseSound()
+                    Button {
+                        
+                        if self.isPaused {
+                            audio.playSound()
+                        } else {
+                            audio.pauseSound()
+                        }
+                        
+                        isPaused.toggle()
+                        
+                    } label: {
+                        Image(systemName: isPaused ? "play.circle" : "pause.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                     }
                     
-                    isPaused.toggle()
-                    
+                }
+                
+                Spacer()
+                
+                Button {
+                    withAnimation {
+                        
+                        isHearted.toggle()
+                        if isHearted {
+                            actionsViewModel.saveSongToLibrary(id: currSong?.id, token: auth.token)
+                            withAnimation {
+                                showUnlikedToast = false
+                                showLikedToast = true
+                            }
+                        } else {
+                            actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: auth.token)
+                            withAnimation {
+                                showLikedToast = false
+                                showUnlikedToast = true
+                            }
+                        }
+                        
+                        
+                    }
                 } label: {
-                    Image(systemName: isPaused ? "play.circle" : "pause.circle")
+                    Image(systemName: isHearted ? "heart.fill" : "heart")
                         .resizable()
                         .frame(width: 30, height: 30)
                         .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                    
                 }
-                                
+                
+                Spacer()
+                
+                Button {
+                    print("PLAYLIST")
+                } label: {
+                    Image(systemName: "text.badge.plus")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                    
+                }
+                
             }
+            .frame(maxWidth: 250)
+            .padding(20)
             
-            Spacer()
-            
-            Button {
-                print("HEART")
-                withAnimation {
-                    isHearted.toggle()
-                }
-            } label: {
-                Image(systemName: isHearted ? "heart.fill" : "heart")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+            if showLikedToast {
+                
+                Text("Song added to Liked Songs")
+                    .padding()
+                    .background(Color("AppGray"))
+                    .opacity(0.8)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.white)
+                    .offset(y: -50)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                showLikedToast = false
+                            }
+                        }
+                    }
                 
             }
             
-            Spacer()
-            
-            Button {
-                print("PLAYLIST")
-            } label: {
-                Image(systemName: "text.badge.plus")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+            if showUnlikedToast {
+                
+                Text("Song removed from Liked Songs")
+                    .padding()
+                    .background(Color("AppGray"))
+                    .opacity(0.8)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.white)
+                    .offset(y: -50)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                showUnlikedToast = false
+                            }
+                        }
+                    }
                 
             }
-            
         }
-        .frame(maxWidth: 250)
-        
     }
 }
 
@@ -96,7 +160,7 @@ struct Actions_Previews: PreviewProvider {
         @State var isEnded = false
         @State var isHearted = false
         
-        ActionsView(currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: Audio())
+        ActionsView(currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: Audio(), auth: Auth())
 
     }
 }

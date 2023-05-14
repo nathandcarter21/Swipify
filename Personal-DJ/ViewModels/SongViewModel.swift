@@ -50,7 +50,7 @@ class SongViewModel: ObservableObject {
                 
                 let res = try JSONDecoder().decode(TopTracksRes.self, from: data)
                 
-                var songsWithPreview = res.items.filter {$0.preview_url != nil}
+                let songsWithPreview = res.items.filter {$0.preview_url != nil}
                 
                 DispatchQueue.main.async {
                     self?.songs = songsWithPreview.reversed()

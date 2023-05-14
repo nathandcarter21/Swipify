@@ -14,22 +14,27 @@ struct SongView: View {
     @State var currSong: Song?
     
     @ObservedObject var audio: Audio
+    @ObservedObject var auth: Auth
     @ObservedObject var songViewModel: SongViewModel
     
     init(audio: Audio, songViewModel: SongViewModel) {
         self.audio = audio
         self.songViewModel = songViewModel
+        self.auth = Auth()
     }
     
-    init(audio: Audio, token: String) {
+    init(audio: Audio, auth: Auth) {
         self.audio = audio
-        self.songViewModel = SongViewModel(token: token)
+        self.auth = auth
+        self.songViewModel = SongViewModel(token: auth.token)
         self.songViewModel.loadSongs()
     }
     
     init(songs: [Song]) {
         self.audio = Audio()
         self.songViewModel = SongViewModel(songs: songs)
+        self.auth = Auth()
+
     }
     
     var body: some View {
@@ -74,7 +79,6 @@ struct SongView: View {
                                 .offset(x: 180, y: 23)
                                 
                             }
-//                            .frame(maxWidth: .infinity, alignment: .trailing)
                             .frame(height: 0)
                             
                         }
@@ -283,7 +287,7 @@ struct SongView: View {
             
             if !showEnd {
                 
-                ActionsView(currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: audio)
+                ActionsView(currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: audio, auth: auth)
                 
             }
             
@@ -299,6 +303,7 @@ struct SongView: View {
                 
                 audio.pauseSound()
                 isPaused = true
+                isHearted = false
                 songViewModel.songs.removeLast()
                 
                 if songViewModel.songs.count == 0 {
@@ -307,7 +312,7 @@ struct SongView: View {
                 
             } else if offset.width > 150 {
                 
-                isHearted.toggle()
+//                isHearted.toggle()
                 
             }
             
