@@ -16,44 +16,13 @@ class SongViewModel: ObservableObject {
         self.token = "123"
     }
     
-//    func skipSong() -> String? {
-//
-//        guard self.songs.count > 1 else {
-//            return nil
-//        }
-//        let url = self.songs[1].preview_url
-//
-//        DispatchQueue.main.async {
-//            self.songs.removeFirst()
-//        }
-//
-//        return url
-//    }
-    
-    func skipSong() -> Bool {
-        if self.songs.count == 1 {
-            
-            DispatchQueue.main.async {
-                self.songs.removeLast()
-            }
-            
-            return true
-        }
-        
-        DispatchQueue.main.async {
-            self.songs.removeLast()
-        }
-        
-        return false
-    }
-    
     func loadSongs() {
                         
         if self.songs.count > 0{
             return
         }
                 
-        guard let url = URL(string: "https://api.spotify.com/v1/me/top/tracks?limit=2&time_range=short_term") else {
+        guard let url = URL(string: "https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=long_term") else {
             return
         }
         

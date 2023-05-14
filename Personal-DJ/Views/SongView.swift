@@ -243,7 +243,7 @@ struct SongView: View {
                             
                             if !showInfo {
                                 
-                                withAnimation() {
+                                withAnimation {
                                     
                                     offset = value.translation
                                     
@@ -255,7 +255,7 @@ struct SongView: View {
                             
                             if !showInfo {
                                 
-                                withAnimation() {
+                                withAnimation {
                                     
                                     handleSwipe()
                                     
@@ -289,7 +289,11 @@ struct SongView: View {
                 
                 audio.pauseSound()
                 isPaused = true
-                showEnd = songViewModel.skipSong()
+                songViewModel.songs.removeLast()
+                
+                if songViewModel.songs.count == 0 {
+                    showEnd = true
+                }
                 
             } else if offset.width > 150 {
                 
