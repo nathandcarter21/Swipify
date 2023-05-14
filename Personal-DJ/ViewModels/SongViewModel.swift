@@ -3,20 +3,16 @@ import AVFoundation
 
 class SongViewModel: ObservableObject {
     
-    var token: String
     
     @Published var songs: [Song] = []
     
-    init(token: String) {
-        self.token = token
-    }
+    init() {}
     
     init(songs: [Song]) {
         self.songs = songs.reversed()
-        self.token = "123"
     }
     
-    func loadSongs() {
+    func loadSongs(token: String) {
                         
         if self.songs.count > 0{
             return

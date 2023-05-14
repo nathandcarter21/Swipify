@@ -14,9 +14,9 @@
             filePath = "Personal-DJ/ViewModels/SongViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "loadSongs()"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "loadSongs(token:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -128,6 +128,211 @@
             endingLineNumber = "46"
             landmarkName = "getUser(token:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5F528E89-F0AD-43A5-A5F8-45F35B4854D0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal-DJ/Views/SongView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "SongView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "5F528E89-F0AD-43A5-A5F8-45F35B4854D0 - 5ceddc756776ce34"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Personal_DJ.SongView.songViewModel : Personal_DJ.SongViewModel"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Views/SongView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "5F528E89-F0AD-43A5-A5F8-45F35B4854D0 - 9f291f49e080dde9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.SongView.songViewModel.getter : Personal_DJ.SongViewModel"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Views/SongView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "5F528E89-F0AD-43A5-A5F8-45F35B4854D0 - 91ab73c28866791b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.SongView.$songViewModel.getter : SwiftUI.ObservedObject&lt;Personal_DJ.SongViewModel&gt;.Wrapper"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Views/SongView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E1E3533F-54BF-4FBC-8692-EEDDAE19B550"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal-DJ/Views/SongView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "SongView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "E1E3533F-54BF-4FBC-8692-EEDDAE19B550 - 5ceddc756776ce34"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Personal_DJ.SongView.songViewModel : Personal_DJ.SongViewModel"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Views/SongView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "E1E3533F-54BF-4FBC-8692-EEDDAE19B550 - 9f291f49e080dde9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.SongView.songViewModel.getter : Personal_DJ.SongViewModel"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Views/SongView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "E1E3533F-54BF-4FBC-8692-EEDDAE19B550 - 91ab73c28866791b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.SongView.$songViewModel.getter : SwiftUI.ObservedObject&lt;Personal_DJ.SongViewModel&gt;.Wrapper"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Views/SongView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C7D773F3-BBAE-4871-ABAD-65D8AD355BDD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal-DJ/Views/SongView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5"
+            endingLineNumber = "5"
+            landmarkName = "SongView"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "863B0091-1282-438E-95C8-5AD39EA73ADB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal-DJ/ViewModels/SongViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "loadSongs(token:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "863B0091-1282-438E-95C8-5AD39EA73ADB - 8be5924c247faaaa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.SongViewModel.__allocating_init(songs: Swift.Array&lt;Personal_DJ.Song&gt;) -&gt; Personal_DJ.SongViewModel"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/ViewModels/SongViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "863B0091-1282-438E-95C8-5AD39EA73ADB - c39d34a39315e342"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.SongViewModel.init(songs: Swift.Array&lt;Personal_DJ.Song&gt;) -&gt; Personal_DJ.SongViewModel"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/ViewModels/SongViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "8"
+                  endingLineNumber = "8"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "863B0091-1282-438E-95C8-5AD39EA73ADB - 5bac9d15f2095572"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.SongViewModel.loadSongs(token: Swift.String) -&gt; ()"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/ViewModels/SongViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "304">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

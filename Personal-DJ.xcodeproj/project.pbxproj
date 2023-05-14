@@ -12,6 +12,7 @@
 		58673AFB2A115B7E00B2829B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFA2A115B7E00B2829B /* User.swift */; };
 		58673AFF2A1168F000B2829B /* SaveSongReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFE2A1168F000B2829B /* SaveSongReq.swift */; };
 		58673B012A116A5F00B2829B /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673B002A116A5F00B2829B /* ActionsViewModel.swift */; };
+		58673B092A118DFF00B2829B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673B082A118DFF00B2829B /* API.swift */; };
 		589127B42A0ED19400CA0B0C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127B32A0ED19400CA0B0C /* App.swift */; };
 		589127B82A0ED19500CA0B0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127B72A0ED19500CA0B0C /* Assets.xcassets */; };
 		589127BB2A0ED19500CA0B0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127BA2A0ED19500CA0B0C /* Preview Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		58673AFA2A115B7E00B2829B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		58673AFE2A1168F000B2829B /* SaveSongReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSongReq.swift; sourceTree = "<group>"; };
 		58673B002A116A5F00B2829B /* ActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
+		58673B082A118DFF00B2829B /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		589127B02A0ED19400CA0B0C /* Personal-DJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal-DJ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		589127B32A0ED19400CA0B0C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		589127B72A0ED19500CA0B0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,12 +124,12 @@
 		589127C12A0ED24A00CA0B0C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				589127CF2A0F04EB00CA0B0C /* ViewSwitcher.swift */,
+				589127CD2A0F03FD00CA0B0C /* SignInView.swift */,
 				589127C22A0ED26D00CA0B0C /* HomeView.swift */,
+				589127CB2A0EE28800CA0B0C /* SettingsView.swift */,
 				589127C42A0ED27E00CA0B0C /* SongView.swift */,
 				589127C62A0ED29D00CA0B0C /* ActionsView.swift */,
-				589127CB2A0EE28800CA0B0C /* SettingsView.swift */,
-				589127CD2A0F03FD00CA0B0C /* SignInView.swift */,
-				589127CF2A0F04EB00CA0B0C /* ViewSwitcher.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,10 +137,10 @@
 		589127C82A0ED6C800CA0B0C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				58673AFD2A1168DD00B2829B /* Req */,
-				58673AFC2A11654100B2829B /* Res */,
 				589127C92A0ED6E100CA0B0C /* Song.swift */,
 				58673AFA2A115B7E00B2829B /* User.swift */,
+				58673AFD2A1168DD00B2829B /* Req */,
+				58673AFC2A11654100B2829B /* Res */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,6 +150,7 @@
 			children = (
 				589127D32A0F056800CA0B0C /* Auth.swift */,
 				589127D92A0F0BCF00CA0B0C /* Audio.swift */,
+				58673B082A118DFF00B2829B /* API.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -156,8 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				589127D72A0F065500CA0B0C /* SignInViewModel.swift */,
-				589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */,
 				58673AF62A1155E600B2829B /* SettingsViewModel.swift */,
+				589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */,
 				58673B002A116A5F00B2829B /* ActionsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				589127D62A0F05AF00CA0B0C /* AccessTokenRes.swift in Sources */,
+				58673B092A118DFF00B2829B /* API.swift in Sources */,
 				589127C52A0ED27E00CA0B0C /* SongView.swift in Sources */,
 				589127D02A0F04EB00CA0B0C /* ViewSwitcher.swift in Sources */,
 				589127CE2A0F03FD00CA0B0C /* SignInView.swift in Sources */,

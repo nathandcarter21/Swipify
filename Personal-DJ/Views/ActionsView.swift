@@ -20,8 +20,8 @@ struct ActionsView: View {
     @Binding var isEnded: Bool
     @Binding var isHearted: Bool
     
-    @ObservedObject var audio: Audio
-    @ObservedObject var auth: Auth
+    var audio: Audio
+    var auth: Auth
 
     
     var actionsViewModel = ActionsViewModel()
@@ -113,7 +113,7 @@ struct ActionsView: View {
             
             if showLikedToast {
                 
-                Text("Song added to Liked Songs")
+                Text("Added to Liked Songs")
                     .padding()
                     .background(Color("AppGray"))
                     .opacity(0.8)
@@ -132,7 +132,7 @@ struct ActionsView: View {
             
             if showUnlikedToast {
                 
-                Text("Song removed from Liked Songs")
+                Text("Removed from Liked Songs")
                     .padding()
                     .background(Color("AppGray"))
                     .opacity(0.8)

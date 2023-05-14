@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @ObservedObject var auth: Auth
-    @ObservedObject var audio: Audio
+    var auth: Auth
+    var audio: Audio
             
     var body: some View {
 

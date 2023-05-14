@@ -12,7 +12,7 @@ struct SignInView: View {
     
     @State var showWebView = false
     
-    @ObservedObject var auth: Auth
+    var auth: Auth
     
     var signInViewModel = SignInViewModel()
     
@@ -41,6 +41,7 @@ struct SignInView: View {
                     Text("Sign in with Spotify")
                         .padding(.trailing, 20)
                         .foregroundColor(Color.black)
+                        .font(.system(size: 20))
                     
                     Spacer()
                     
