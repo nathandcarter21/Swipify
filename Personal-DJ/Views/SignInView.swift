@@ -23,18 +23,34 @@ struct SignInView: View {
                 .fontWeight(.light)
             
             Spacer()
-                                    
+            
             Button(action: {
                 showWebView.toggle()
             }, label: {
-                Text("Sign in with Spotify")
-                    .font(.headline)
-                    .frame(maxWidth:.infinity)
-                    .frame(height: 55)
-                    .background(Color.green)
-                    .foregroundColor(Color.black)
-                    .cornerRadius(10)
-                    .padding()
+                
+                HStack {
+                    
+                    Image("Spotify_Icon_Black_Coated")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .padding(.leading, 20)
+                    
+                    
+                    Spacer()
+                    
+                    Text("Sign in with Spotify")
+                        .padding(.trailing, 20)
+                        .foregroundColor(Color.black)
+                    
+                    Spacer()
+                    
+                }
+                .frame(height: 55)
+                .frame(maxWidth: .infinity)
+                .background(Color("Spotify"))
+                .cornerRadius(10)
+                .padding()
+                
             })
             .fullScreenCover(isPresented: $showWebView) {
                 HStack {
@@ -56,7 +72,7 @@ struct SignInView: View {
 }
 
 struct WebView: UIViewRepresentable {
- 
+    
     @Binding var showWebView: Bool
 
     @ObservedObject var auth: Auth

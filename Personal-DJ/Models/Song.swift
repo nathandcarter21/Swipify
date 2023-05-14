@@ -19,7 +19,7 @@ struct Song: Hashable, Codable {
     var href: String
     var name: String
     var popularity: Int
-    var preview_url: String
+    var preview_url: String?
     var uri: String
     var is_local: Bool
     var album: Album

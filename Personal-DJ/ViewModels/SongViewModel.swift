@@ -22,7 +22,7 @@ class SongViewModel: ObservableObject {
             return
         }
                 
-        guard let url = URL(string: "https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=long_term") else {
+        guard let url = URL(string: "https://api.spotify.com/v1/me/top/tracks?limit=25&time_range=long_term") else {
             return
         }
         
@@ -49,8 +49,11 @@ class SongViewModel: ObservableObject {
 //                }
                 
                 let res = try JSONDecoder().decode(TopTracksRes.self, from: data)
+                
+                var songsWithPreview = res.items.filter {$0.preview_url != nil}
+                
                 DispatchQueue.main.async {
-                    self?.songs = res.items.reversed()
+                    self?.songs = songsWithPreview.reversed()
                 }
             }
             catch{

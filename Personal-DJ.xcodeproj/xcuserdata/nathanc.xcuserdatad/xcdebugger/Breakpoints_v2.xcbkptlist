@@ -20,5 +20,115 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4D9549E-C32B-4106-83B7-DEFE88B91406"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal-DJ/Managers/Auth.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "getUser(token:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E4D9549E-C32B-4106-83B7-DEFE88B91406 - d5a6ec8955240923"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.Auth.getUser() -&gt; ()"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Managers/Auth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "388">
+               </Location>
+               <Location
+                  uuid = "E4D9549E-C32B-4106-83B7-DEFE88B91406 - d5a6ec8955240923"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.Auth.getUser() -&gt; ()"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Managers/Auth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "288">
+               </Location>
+               <Location
+                  uuid = "E4D9549E-C32B-4106-83B7-DEFE88B91406 - d5a6ec8955240923"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.Auth.getUser() -&gt; ()"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Managers/Auth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "476">
+               </Location>
+               <Location
+                  uuid = "E4D9549E-C32B-4106-83B7-DEFE88B91406 - d5a6ec8955240923"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_DJ.Auth.getUser() -&gt; ()"
+                  moduleName = "Personal-DJ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathanc/Code/Swift/Personal-DJ/Personal-DJ/Managers/Auth.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "376">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "782E846F-6AFE-4789-8F05-5190D48834B1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal-DJ/Managers/Auth.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "getUser(token:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EAFFC07-1F32-4BB3-84BE-01574DAAB4B0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal-DJ/Managers/Auth.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "getUser(token:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

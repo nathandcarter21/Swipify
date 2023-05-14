@@ -20,6 +20,7 @@ struct HomeView: View {
             audio:audio,
             token: auth.token
         )
+        .navigationBarTitleDisplayMode(.automatic)
         .navigationBarItems(
             trailing:
                 

@@ -11,35 +11,52 @@ struct SettingsView: View {
     
     @ObservedObject var auth: Auth
     @ObservedObject var audio: Audio
-
-    
+            
     var body: some View {
 
         VStack {
             
-            HStack {
+            if let user = auth.user {
                 
-                Image(systemName: "bolt.trianglebadge.exclamationmark")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .padding(.leading, 20)
-                    .foregroundColor(Color.black)
-
+                Button {
                     
-                Spacer()
-                
-                Text("nathandcarter21")
-                    .padding(.trailing, 20)
-                    .foregroundColor(Color.black)
-
-                Spacer()
+                    if let uri = user.uri, let url = URL(string: uri) {
+                        
+                        UIApplication.shared.open(url)
+                        
+                    }
+                    
+                } label: {
+                    
+                    HStack {
+                        
+                        Image("Spotify_Icon_Black_Coated")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .padding(.leading, 20)
+                        
+                        
+                        Spacer()
+                        
+                        Text(user.email ?? "")
+                            .padding(.trailing, 20)
+                            .foregroundColor(Color.black)
+                        
+                        Spacer()
+                        
+                    }
+                    .frame(height: 55)
+                    .frame(maxWidth: .infinity)
+                    .background(Color("Spotify"))
+                    .cornerRadius(10)
+                    .padding(.top, 50)
+                    .onAppear {
+                        
+                    }
+                    
+                }
                 
             }
-                .frame(height: 55)
-                .frame(maxWidth: .infinity)
-                .background(Color("Spotify"))
-                .cornerRadius(10)
-                .padding(.top, 50)
             
             Spacer()
             

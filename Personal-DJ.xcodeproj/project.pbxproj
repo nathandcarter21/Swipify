@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		581647D22A0F1F0700DE758F /* SongView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581647D12A0F1F0700DE758F /* SongView2.swift */; };
+		58673AF72A1155E600B2829B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AF62A1155E600B2829B /* SettingsViewModel.swift */; };
+		58673AF92A11583600B2829B /* CurrentUserRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AF82A11583600B2829B /* CurrentUserRes.swift */; };
+		58673AFB2A115B7E00B2829B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFA2A115B7E00B2829B /* User.swift */; };
 		589127B42A0ED19400CA0B0C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127B32A0ED19400CA0B0C /* App.swift */; };
 		589127B82A0ED19500CA0B0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127B72A0ED19500CA0B0C /* Assets.xcassets */; };
 		589127BB2A0ED19500CA0B0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127BA2A0ED19500CA0B0C /* Preview Assets.xcassets */; };
@@ -26,7 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		581647D12A0F1F0700DE758F /* SongView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongView2.swift; sourceTree = "<group>"; };
+		58673AF62A1155E600B2829B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		58673AF82A11583600B2829B /* CurrentUserRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserRes.swift; sourceTree = "<group>"; };
+		58673AFA2A115B7E00B2829B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		589127B02A0ED19400CA0B0C /* Personal-DJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal-DJ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		589127B32A0ED19400CA0B0C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		589127B72A0ED19500CA0B0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +107,6 @@
 				589127CB2A0EE28800CA0B0C /* SettingsView.swift */,
 				589127CD2A0F03FD00CA0B0C /* SignInView.swift */,
 				589127CF2A0F04EB00CA0B0C /* ViewSwitcher.swift */,
-				581647D12A0F1F0700DE758F /* SongView2.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,6 +116,8 @@
 			children = (
 				589127C92A0ED6E100CA0B0C /* Song.swift */,
 				589127D52A0F05AF00CA0B0C /* AccessTokenReq.swift */,
+				58673AF82A11583600B2829B /* CurrentUserRes.swift */,
+				58673AFA2A115B7E00B2829B /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			children = (
 				589127D72A0F065500CA0B0C /* SignInViewModel.swift */,
 				589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */,
+				58673AF62A1155E600B2829B /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -209,16 +215,18 @@
 				589127C52A0ED27E00CA0B0C /* SongView.swift in Sources */,
 				589127D02A0F04EB00CA0B0C /* ViewSwitcher.swift in Sources */,
 				589127CE2A0F03FD00CA0B0C /* SignInView.swift in Sources */,
-				581647D22A0F1F0700DE758F /* SongView2.swift in Sources */,
+				58673AFB2A115B7E00B2829B /* User.swift in Sources */,
 				589127C72A0ED29D00CA0B0C /* ActionsView.swift in Sources */,
 				589127C32A0ED26D00CA0B0C /* HomeView.swift in Sources */,
 				589127DA2A0F0BCF00CA0B0C /* Audio.swift in Sources */,
 				589127CC2A0EE28800CA0B0C /* SettingsView.swift in Sources */,
+				58673AF92A11583600B2829B /* CurrentUserRes.swift in Sources */,
 				589127B42A0ED19400CA0B0C /* App.swift in Sources */,
 				589127D82A0F065500CA0B0C /* SignInViewModel.swift in Sources */,
 				589127DC2A0F0E2600CA0B0C /* SongViewModel.swift in Sources */,
 				589127CA2A0ED6E100CA0B0C /* Song.swift in Sources */,
 				589127D42A0F056800CA0B0C /* Auth.swift in Sources */,
+				58673AF72A1155E600B2829B /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

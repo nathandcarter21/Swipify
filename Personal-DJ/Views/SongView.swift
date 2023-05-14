@@ -53,7 +53,7 @@ struct SongView: View {
                     
                     VStack {
                         
-                        if showInfo {
+                        if index == songViewModel.songs.count - 1 && showInfo {
                             
                             HStack {
                                 
@@ -68,32 +68,42 @@ struct SongView: View {
                                     Image(systemName: "xmark")
                                         .resizable()
                                         .frame(width: 20, height: 20)
-                                        .offset(y: 20)
                                     
                                 }
                                 .buttonStyle(.plain)
+                                .offset(x: 180, y: 23)
                                 
                             }
-                            .frame(maxWidth: 300, alignment: .trailing)
+//                            .frame(maxWidth: .infinity, alignment: .trailing)
                             .frame(height: 0)
                             
                         }
                         
                         if index == songViewModel.songs.count - 1 {
                             
-                            Text(song.name)
-                                .frame(maxWidth: 300, alignment: .leading)
-                                .bold()
-                                .font(.system(size: 20))
-                                .onAppear {
-                                    
-                                    audio.playSong(url: song.preview_url)
-                                    isPaused = false
-                                    currSong = song
-                                    
-                                }
-                            
-                            
+                            HStack {
+                                
+                                Text(song.name)
+                                    .frame(maxWidth: 300, alignment: .leading)
+                                    .bold()
+                                    .font(.system(size: 20))
+                                    .onAppear {
+                                        
+//                                      audio.playSong(url: song.preview_url)
+                                        isPaused = false
+                                        currSong = song
+                                        
+                                    }
+                                
+                                Spacer()
+                                                                    
+                                    Image("Spotify_Icon_Black_Coated")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                                                    
+                            }
+                            .frame(width: 300)
+                                
                         }
                         
                         AsyncImage(url: URL(string: song.album.getImage().url), content: { returnedImage in
