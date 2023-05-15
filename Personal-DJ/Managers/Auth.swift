@@ -12,7 +12,48 @@ class Auth: ObservableObject {
     var token: String = ""
     var codeVerifier: String?
     
-    var url = "https://accounts.spotify.com/authorize?response_type=code&client_id=815d77f6e74645738bf81edb150d456e&scope=user-top-read,user-read-private,user-read-email,user-library-read,user-library-modify&redirect_uri=https://github.com/nathandcarter21&code_challenge_method=S256&code_challenge="
+    var url = "https://accounts.spotify.com/authorize?response_type=code&client_id=815d77f6e74645738bf81edb150d456e&scope=user-top-read,user-read-private,user-read-email,user-library-read,user-library-modify,playlist-modify-public,playlist-modify-private&redirect_uri=https://github.com/nathandcarter21&code_challenge_method=S256&code_challenge="
+    
+    func getPlaylists(token: String) {
+        
+        guard let url = URL(string: "https://api.spotify.com/v1/me/playlists?limit=50") else {
+            return
+        }
+        
+        let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded",
+                                            "Authorization": "Bearer " + token]
+
+        
+        var req = URLRequest(url:url)
+        req.httpMethod = "GET"
+        req.allHTTPHeaderFields = reqHeaders
+        
+        URLSession.shared.dataTask(with: req){
+            [weak self]
+            data, res, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            do {
+                
+//                print("JSON")
+//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//                if let responseJSON = responseJSON as? [String: Any] {
+//                    print(responseJSON)
+//                }
+
+                let res = try JSONDecoder().decode(UserPlaylistsRes.self, from: data)
+                DispatchQueue.main.async {
+                    self?.user?.playlists = res.items?.filter { $0.owner.id == self?.user?.id }
+                }
+            }
+            catch{
+                print("ERROR\(error)")
+            }
+        }.resume()
+        
+        
+    }
 
     func getUser(token: String) {
         
@@ -45,13 +86,13 @@ class Auth: ObservableObject {
                 let res = try JSONDecoder().decode(CurrentUserRes.self, from: data)
                 DispatchQueue.main.async {
                     self?.user = User(id: res.id, country: res.country, display_name: res.display_name, email: res.email, explicit_content: res.explicit_content, images: res.images, product: res.product, uri: res.uri)
+                    self?.getPlaylists(token: token)
                 }
             }
             catch{
                 print("ERROR\(error)")
             }
         }.resume()
-        
         
     }
     

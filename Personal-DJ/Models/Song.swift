@@ -77,8 +77,8 @@ struct Artist: Hashable, Codable {
 }
 
 struct AlbumImage: Hashable, Codable {
-    var height: Int
-    var width: Int
+    var height: Int?
+    var width: Int?
     var url: String
  
     init(height: Int, width: Int, url: String){

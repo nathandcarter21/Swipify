@@ -74,7 +74,7 @@ struct SongView: View {
                                     .font(.system(size: 20))
                                     .onAppear {
                                         
-//                                      audio.playSong(url: song.preview_url)
+                                      audio.playSong(url: song.preview_url)
                                         isPaused = false
                                         currSong = song
                                         

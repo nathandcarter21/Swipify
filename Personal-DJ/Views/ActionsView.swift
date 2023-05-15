@@ -13,6 +13,8 @@ struct ActionsView: View {
     
     @State var showLikedToast = false
     @State var showUnlikedToast = false
+    @State var showPlaylists = false
+    @State var showAddedToPlaylistToast = false
 
         
     @Binding var currSong: Song?
@@ -98,7 +100,7 @@ struct ActionsView: View {
                 Spacer()
                 
                 Button {
-                    print("PLAYLIST")
+                    showPlaylists = true
                 } label: {
                     Image(systemName: "text.badge.plus")
                         .resizable()
@@ -146,8 +148,29 @@ struct ActionsView: View {
                             }
                         }
                     }
-                
             }
+            
+            if showAddedToPlaylistToast {
+                
+                Text("Added to playlist")
+                    .padding()
+                    .background(Color("AppGray"))
+                    .opacity(0.8)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.white)
+                    .offset(y: -50)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                showAddedToPlaylistToast = false
+                            }
+                        }
+                    }
+            }
+        }
+        
+        .sheet(isPresented: $showPlaylists) {
+            PlaylistView(auth: auth, showPlaylists: $showPlaylists, currSong: $currSong, showAddedToPlaylistToast: $showAddedToPlaylistToast)
         }
     }
 }

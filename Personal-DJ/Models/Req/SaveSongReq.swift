@@ -10,3 +10,6 @@ import SwiftUI
 struct SaveSongReq: Encodable {
     let ids: [String]
 }
+struct AddSongReq: Encodable {
+    let uris: [String]
+}
