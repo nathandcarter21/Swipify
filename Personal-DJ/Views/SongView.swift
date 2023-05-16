@@ -74,7 +74,7 @@ struct SongView: View {
                                     .font(.system(size: 20))
                                     .onAppear {
                                         
-                                      audio.playSong(url: song.preview_url)
+//                                        audio.playSong(url: song.preview_url)
                                         isPaused = false
                                         currSong = song
                                         
@@ -91,7 +91,7 @@ struct SongView: View {
                                 
                         }
                         
-                        AsyncImage(url: URL(string: song.album.getImage().url), content: { returnedImage in
+                        AsyncImage(url: URL(string: song.album.images[0].url), content: { returnedImage in
                             
                             returnedImage
                                 .resizable()
@@ -135,7 +135,7 @@ struct SongView: View {
                                     
                                 }
                                 
-                                Text(song.album.getArtist().name)
+                                Text(song.album.artists[0].name)
                                     .font(.system(size: 20))
                                 
                             }
@@ -175,7 +175,7 @@ struct SongView: View {
                                     
                                 }
                                 
-                                Text("\(song.popularity)")
+                                Text("\(song.popularity ?? 50)")
                                     .font(.system(size: 20))
                                 
                             }
@@ -275,7 +275,12 @@ struct SongView: View {
         }
         
         .onAppear {
-            songViewModel.loadSongs(token: auth.token)
+            if let token = auth.getToken(service: "access_token", account: "spotify") {
+                songViewModel.loadSongs(token: token)
+            }
+        }
+        .onDisappear {
+            audio.pauseSound()
         }
         
     }
@@ -289,6 +294,7 @@ struct SongView: View {
                 audio.pauseSound()
                 isPaused = true
                 isHearted = false
+                isEnded = false
                 songViewModel.songs.removeLast()
                 
                 if songViewModel.songs.count == 0 {

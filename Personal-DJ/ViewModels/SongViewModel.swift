@@ -3,7 +3,6 @@ import AVFoundation
 
 class SongViewModel: ObservableObject {
     
-    
     @Published var songs: [Song] = []
     
     init() {}
@@ -14,7 +13,7 @@ class SongViewModel: ObservableObject {
     
     func loadSongs(token: String) {
                         
-        if self.songs.count > 0{
+        guard self.songs.count <= 0 else {
             return
         }
                 
@@ -22,11 +21,8 @@ class SongViewModel: ObservableObject {
             return
         }
         
-        let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded",
-                                            "Authorization": "Bearer " + token]
-
-        
-        var req = URLRequest(url:url)
+        let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer " + token]
+        var req = URLRequest(url: url)
         req.httpMethod = "GET"
         req.allHTTPHeaderFields = reqHeaders
         
@@ -44,12 +40,12 @@ class SongViewModel: ObservableObject {
 //                    print(responseJSON)
 //                }
                 
-                let res = try JSONDecoder().decode(TopTracksRes.self, from: data)
+                let res = try JSONDecoder().decode(TopSongsRes.self, from: data)
                 
-                let songsWithPreview = res.items.filter {$0.preview_url != nil}
+                let songsWithPreview = res.items?.filter {$0.preview_url != nil}
                 
                 DispatchQueue.main.async {
-                    self?.songs = songsWithPreview.reversed()
+                    self?.songs = songsWithPreview?.reversed() ?? []
                 }
             }
             catch{

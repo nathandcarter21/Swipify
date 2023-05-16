@@ -18,7 +18,6 @@ class Audio: ObservableObject {
     
     func playSong(url: String?) {
         if let urlString = url, let url = URL(string: urlString) {
-            
             let playerItem = AVPlayerItem(url: url)
             self.audioPlayer = AVPlayer(playerItem: playerItem)
                         

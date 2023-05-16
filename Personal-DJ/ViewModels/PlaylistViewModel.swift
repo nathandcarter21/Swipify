@@ -15,13 +15,10 @@ class PlaylistViewModel {
                 return
             }
             
-            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded",
-                                                "Authorization": "Bearer " + token]
-            
+            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer " + token]
             let reqBody = AddSongReq(uris: [song])
             
             do {
-                
                 let jsonBody = try JSONEncoder().encode(reqBody)
                 var req = URLRequest(url:url)
                 req.httpMethod = "POST"
@@ -45,7 +42,6 @@ class PlaylistViewModel {
             } catch {
                 print(error)
             }
-            
         }
     }
 }

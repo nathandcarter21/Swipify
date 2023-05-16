@@ -17,13 +17,10 @@ class ActionsViewModel {
                 return
             }
             
-            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded",
-                                                "Authorization": "Bearer " + token]
-            
+            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer " + token]
             let reqBody = SaveSongReq(ids: [id])
             
             do {
-                
                 let jsonBody = try JSONEncoder().encode(reqBody)
                 var req = URLRequest(url:url)
                 req.httpMethod = "PUT"
@@ -58,13 +55,10 @@ class ActionsViewModel {
                 return
             }
             
-            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded",
-                                                "Authorization": "Bearer " + token]
-            
+            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer " + token]
             let reqBody = SaveSongReq(ids: [id])
             
             do {
-                
                 let jsonBody = try JSONEncoder().encode(reqBody)
                 var req = URLRequest(url:url)
                 req.httpMethod = "DELETE"
@@ -84,7 +78,6 @@ class ActionsViewModel {
 //                    }
                     
                 }.resume()
-                
             } catch {
                 print(error)
             }

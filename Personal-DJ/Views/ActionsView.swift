@@ -24,7 +24,6 @@ struct ActionsView: View {
     
     var audio: Audio
     var auth: Auth
-
     
     var actionsViewModel = ActionsViewModel()
     
@@ -74,13 +73,17 @@ struct ActionsView: View {
                         
                         isHearted.toggle()
                         if isHearted {
-                            actionsViewModel.saveSongToLibrary(id: currSong?.id, token: auth.token)
+                            if let token = auth.getToken(service: "access_token", account: "spotify") {
+                                actionsViewModel.saveSongToLibrary(id: currSong?.id, token: token)
+                            }
                             withAnimation {
                                 showUnlikedToast = false
                                 showLikedToast = true
                             }
                         } else {
-                            actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: auth.token)
+                            if let token = auth.getToken(service: "access_token", account: "spotify") {
+                                actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: token)
+                            }
                             withAnimation {
                                 showLikedToast = false
                                 showUnlikedToast = true

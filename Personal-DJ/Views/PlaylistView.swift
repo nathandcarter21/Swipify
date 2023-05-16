@@ -16,13 +16,13 @@ struct PlaylistView: View {
     @Binding var currSong: Song?
     @Binding var showAddedToPlaylistToast: Bool
     
+    
     var body: some View {
         
-        VStack {
+       VStack {
             
             Button {
                 showPlaylists.toggle()
-                showAddedToPlaylistToast = true
             } label: {
                 Image(systemName: "xmark")
                     .resizable()
@@ -33,20 +33,20 @@ struct PlaylistView: View {
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding()
             
-            if let playlists = auth.user?.playlists {
+           if let playlists = auth.playlists {
                 
                 ScrollView(showsIndicators: false) {
                     
-                    VStack(spacing: 5) {
+                    LazyVStack(spacing: 5) {
                         
                         ForEach(Array(playlists.enumerated()), id:\.element) { index, playlist in
                             
                             Button {
-                                
-                                playlistViewModel.addSongToPlaylist(token: auth.token, song: currSong?.uri, playlist: playlist.id)
-                                showPlaylists.toggle()
-                                showAddedToPlaylistToast = true
-                                
+                                if let token = auth.getToken(service: "access_token", account: "spotify") {
+                                    playlistViewModel.addSongToPlaylist(token: token, song: currSong?.uri, playlist: playlist.id)
+                                    showPlaylists.toggle()
+                                    showAddedToPlaylistToast = true
+                                }
                             } label: {
                                 
                                 HStack {
