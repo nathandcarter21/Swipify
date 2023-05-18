@@ -13,7 +13,7 @@ struct SongView: View {
     @State var isHearted = false
     @State var currSong: Song?
     
-    var audio: Audio
+    @ObservedObject var audio: Audio
     var auth: Auth
     
     @StateObject var songViewModel = SongViewModel()
@@ -74,7 +74,7 @@ struct SongView: View {
                                     .font(.system(size: 20))
                                     .onAppear {
                                         
-//                                        audio.playSong(url: song.preview_url)
+                                        audio.playSong(url: song.preview_url)
                                         isPaused = false
                                         currSong = song
                                         
@@ -193,7 +193,7 @@ struct SongView: View {
                                     
                                 }
                                 
-                                Text(song.album.release_date)
+                                Text(song.album.release_date ?? "never")
                                     .font(.system(size: 20))
                                 
                             }
@@ -275,12 +275,13 @@ struct SongView: View {
         }
         
         .onAppear {
-            if let token = auth.getToken(service: "access_token", account: "spotify") {
-                songViewModel.loadSongs(token: token)
+            Task {
+                if songViewModel.songs.count == 0 {
+                    if let token = await auth.getAccessToken() {
+                        songViewModel.loadSongs(token: token)
+                    }
+                }
             }
-        }
-        .onDisappear {
-            audio.pauseSound()
         }
         
     }
@@ -291,7 +292,6 @@ struct SongView: View {
             
             if offset.width < -150 {
                 
-                audio.pauseSound()
                 isPaused = true
                 isHearted = false
                 isEnded = false
@@ -299,6 +299,7 @@ struct SongView: View {
                 
                 if songViewModel.songs.count == 0 {
                     showEnd = true
+//                    audio.pauseSound()
                 }
                 
             } else if offset.width > 150 {

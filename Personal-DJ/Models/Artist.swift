@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Artist: Hashable, Decodable {
-    var href: String
+    var href: String?
     var id: String
     var name: String
-    var uri: String
+    var uri: String?
 }

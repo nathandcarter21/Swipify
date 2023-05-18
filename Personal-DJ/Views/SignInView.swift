@@ -117,7 +117,7 @@ struct WebView: UIViewRepresentable {
                 }
 
                 DispatchQueue.main.async {
-                    self.parent.auth.getAccessToken(code: code)
+                    self.parent.auth.requestToken(code: code)
                     self.parent.showWebView = false
                 }
             }

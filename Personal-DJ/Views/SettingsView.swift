@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     
     var auth: Auth
-    var audio: Audio
+    @ObservedObject var audio: Audio
             
     var body: some View {
 
@@ -50,9 +50,6 @@ struct SettingsView: View {
                     .background(Color("Spotify"))
                     .cornerRadius(10)
                     .padding(.top, 50)
-                    .onAppear {
-                        
-                    }
                     
                 }
                 
@@ -110,6 +107,7 @@ struct SettingsView: View {
             
             Button(action: {
 
+                audio.stopSound()
                 auth.logOut()
 
             }, label: {

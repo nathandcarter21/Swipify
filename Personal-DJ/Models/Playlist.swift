@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Playlist: Hashable, Decodable {
-    var href: String
+    var href: String?
     var id: String
     var name: String
     var owner: User

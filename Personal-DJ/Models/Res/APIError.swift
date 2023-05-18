@@ -8,6 +8,6 @@
 import SwiftUI
 
 class APIError: Decodable {
-    var status: Int
-    var message: String
+    var status: Int?
+    var message: String?
 }

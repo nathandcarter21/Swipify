@@ -21,6 +21,13 @@ struct ViewSwitcher: View {
         
         else {
             HomeView(auth: auth)
+                .onAppear {
+                    Task {
+                        if let token = await auth.getAccessToken() {
+                            auth.getUser(token: token)
+                        }
+                    }
+                }
         }
     }
 }

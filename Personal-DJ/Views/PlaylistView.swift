@@ -42,10 +42,12 @@ struct PlaylistView: View {
                         ForEach(Array(playlists.enumerated()), id:\.element) { index, playlist in
                             
                             Button {
-                                if let token = auth.getToken(service: "access_token", account: "spotify") {
-                                    playlistViewModel.addSongToPlaylist(token: token, song: currSong?.uri, playlist: playlist.id)
-                                    showPlaylists.toggle()
-                                    showAddedToPlaylistToast = true
+                                Task {
+                                    if let token = await auth.getAccessToken() {
+                                        playlistViewModel.addSongToPlaylist(token: token, song: currSong?.uri, playlist: playlist.id)
+                                        showPlaylists.toggle()
+                                        showAddedToPlaylistToast = true
+                                    }
                                 }
                             } label: {
                                 

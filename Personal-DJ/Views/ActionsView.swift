@@ -73,16 +73,20 @@ struct ActionsView: View {
                         
                         isHearted.toggle()
                         if isHearted {
-                            if let token = auth.getToken(service: "access_token", account: "spotify") {
-                                actionsViewModel.saveSongToLibrary(id: currSong?.id, token: token)
+                            Task {
+                                if let token = await auth.getAccessToken() {
+                                    actionsViewModel.saveSongToLibrary(id: currSong?.id, token: token)
+                                }
                             }
                             withAnimation {
                                 showUnlikedToast = false
                                 showLikedToast = true
                             }
                         } else {
-                            if let token = auth.getToken(service: "access_token", account: "spotify") {
-                                actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: token)
+                            Task {
+                                if let token = await auth.getAccessToken() {
+                                    actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: token)
+                                }
                             }
                             withAnimation {
                                 showLikedToast = false

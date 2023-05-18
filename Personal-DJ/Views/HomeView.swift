@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     var auth : Auth
-    var audio = Audio()
+    @StateObject var audio = Audio()
     
     var body: some View {
         
