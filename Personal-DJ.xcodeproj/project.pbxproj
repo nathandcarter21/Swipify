@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58620F6A2A1729170098F35A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58620F692A1729170098F35A /* Error.swift */; };
 		58673AFB2A115B7E00B2829B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFA2A115B7E00B2829B /* User.swift */; };
 		58673AFF2A1168F000B2829B /* SaveSongReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFE2A1168F000B2829B /* SaveSongReq.swift */; };
 		58673B012A116A5F00B2829B /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673B002A116A5F00B2829B /* ActionsViewModel.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58620F692A1729170098F35A /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		58673AFA2A115B7E00B2829B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		58673AFE2A1168F000B2829B /* SaveSongReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSongReq.swift; sourceTree = "<group>"; };
 		58673B002A116A5F00B2829B /* ActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				589127C92A0ED6E100CA0B0C /* Song.swift */,
 				58DECE722A13226D00142906 /* Playlist.swift */,
 				58673AFA2A115B7E00B2829B /* User.swift */,
+				58620F692A1729170098F35A /* Error.swift */,
 				58673AFD2A1168DD00B2829B /* Req */,
 				58673AFC2A11654100B2829B /* Res */,
 			);
@@ -272,6 +275,7 @@
 				58DECE692A131C3800142906 /* TopSongsRes.swift in Sources */,
 				589127C72A0ED29D00CA0B0C /* ActionsView.swift in Sources */,
 				58DECE772A13247E00142906 /* AddSongReq.swift in Sources */,
+				58620F6A2A1729170098F35A /* Error.swift in Sources */,
 				589127C32A0ED26D00CA0B0C /* HomeView.swift in Sources */,
 				58E526F02A11AA61006535FB /* PlaylistViewModel.swift in Sources */,
 				58DECE6D2A131FBD00142906 /* APIError.swift in Sources */,

@@ -9,7 +9,7 @@ import SwiftUI
 
 class ActionsViewModel {
     
-    func saveSongToLibrary(id: String?, token: String?) {
+    func saveSongToLibrary(id: String?, token: String?, completion: @escaping (Result<Void, Error>) -> Void) {
         
         if let id = id, let token = token {
             
@@ -17,7 +17,7 @@ class ActionsViewModel {
                 return
             }
             
-            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer " + token]
+            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer f" + token]
             let reqBody = SaveSongReq(ids: [id])
             
             do {
@@ -29,25 +29,43 @@ class ActionsViewModel {
                 
                 URLSession.shared.dataTask(with: req){
                     data, res, error in
-//                    guard let data = data, error == nil else {
-//                        return
-//                    }
                     
-//                    print("JSON")
-//                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                    if let responseJSON = responseJSON as? [String: Any] {
-//                        print(responseJSON)
-//                    }
+                    if let error = error {
+                        completion(.failure(error))
+                    }
+                    
+                    if let httpResponse = res as? HTTPURLResponse {
+                        switch httpResponse.statusCode  {
+                            
+                        case 200:
+                            completion(.success(()))
+                            
+                        case 400:
+                            completion(.failure(SpotifyError.badReq))
+                            
+                        case 401:
+                            completion(.failure(SpotifyError.unauthorized))
+                            
+                        case 403:
+                            completion(.failure(SpotifyError.oathError))
+                            
+                        case 429:
+                            completion(.failure(SpotifyError.rateLimit))
+                        
+                        default:
+                            completion(.failure(SpotifyError.unknown))
+                        }
+                    }
                     
                 }.resume()
                 
             } catch {
-                print(error)
+                completion(.failure(error))
             }
         }
     }
     
-    func removeSongFromLibrary(id: String?, token: String?) {
+    func removeSongFromLibrary(id: String?, token: String?, completion: @escaping (Result<Void, Error>) -> Void) {
         
         if let id = id, let token = token {
             
@@ -65,18 +83,34 @@ class ActionsViewModel {
                 req.allHTTPHeaderFields = reqHeaders
                 req.httpBody = jsonBody
                 
-                URLSession.shared.dataTask(with: req){
-                    data, res, error in
-//                    guard let data = data, error == nil else {
-//                        return
-//                    }
+                URLSession.shared.dataTask(with: req){ data, res, error in
                     
-//                    print("JSON")
-//                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                    if let responseJSON = responseJSON as? [String: Any] {
-//                        print(responseJSON)
-//                    }
+                    if let error = error {
+                        completion(.failure(error))
+                    }
                     
+                    if let httpResponse = res as? HTTPURLResponse {
+                        switch httpResponse.statusCode  {
+                            
+                        case 200:
+                            completion(.success(()))
+                            
+                        case 400:
+                            completion(.failure(SpotifyError.badReq))
+                            
+                        case 401:
+                            completion(.failure(SpotifyError.unauthorized))
+                            
+                        case 403:
+                            completion(.failure(SpotifyError.oathError))
+                            
+                        case 429:
+                            completion(.failure(SpotifyError.rateLimit))
+                        
+                        default:
+                            completion(.failure(SpotifyError.unknown))
+                        }
+                    }
                 }.resume()
             } catch {
                 print(error)

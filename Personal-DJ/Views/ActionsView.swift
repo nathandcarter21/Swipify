@@ -15,8 +15,11 @@ struct ActionsView: View {
     @State var showUnlikedToast = false
     @State var showPlaylists = false
     @State var showAddedToPlaylistToast = false
-
-        
+    @State var showError = false
+    @State var errorMessage = ""
+    @State var authError = false
+    
+    
     @Binding var currSong: Song?
     @Binding var isPaused: Bool
     @Binding var isEnded: Bool
@@ -69,33 +72,89 @@ struct ActionsView: View {
                 Spacer()
                 
                 Button {
-                    withAnimation {
-                        
-                        isHearted.toggle()
-                        if isHearted {
-                            Task {
-                                if let token = await auth.getAccessToken() {
-                                    actionsViewModel.saveSongToLibrary(id: currSong?.id, token: token)
+                    if !isHearted {
+                        Task {
+                            if let token = await auth.getAccessToken() {
+                                actionsViewModel.saveSongToLibrary(id: currSong?.id, token: token) { res in
+                                    switch res {
+                                        
+                                    case .success():
+                                        withAnimation {
+                                            isHearted.toggle()
+                                            showUnlikedToast = false
+                                            showLikedToast = true
+                                        }
+                                        
+                                    case .failure(let error):
+                                        print(error)
+                                        switch error {
+                                            
+                                        case SpotifyError.unauthorized:
+                                            errorMessage = "Error authorizing your account. Please log back in."
+                                            showError = true
+                                            authError = true
+                                            
+                                        case SpotifyError.badReq:
+                                            errorMessage = "Invalid Request"
+                                            showError = true
+                                            
+                                        case SpotifyError.oathError:
+                                            errorMessage = "OATH2.0 Error. Please log back in."
+                                            showError = true
+                                            authError = true
+                                            
+                                        case SpotifyError.rateLimit:
+                                            errorMessage = "Servers are busy. Come back later"
+                                            showError = true
+                                            
+                                        default:
+                                            errorMessage = "Unknown error occured"
+                                            showError = true
+                                        }
+                                    }
                                 }
                             }
-                            withAnimation {
-                                showUnlikedToast = false
-                                showLikedToast = true
-                            }
-                        } else {
-                            Task {
-                                if let token = await auth.getAccessToken() {
-                                    actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: token)
+                            
+                        }
+                    }else {
+                        Task {
+                            if let token = await auth.getAccessToken() {
+                                actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: token) { res in
+                                    switch res {
+                                        
+                                    case .success():
+                                        withAnimation {
+                                            isHearted.toggle()
+                                            showLikedToast = false
+                                            showUnlikedToast = true
+                                        }
+                                        
+                                    case .failure(let error):
+                                        print(error)
+                                        switch error {
+                                        case SpotifyError.unauthorized:
+                                            errorMessage = "Please log back in"
+                                            showError = true
+                                        case SpotifyError.badReq:
+                                            errorMessage = "Invalid Request"
+                                            showError = true
+                                        case SpotifyError.oathError:
+                                            errorMessage = "Please "
+                                            showError = true
+                                            
+                                        case SpotifyError.rateLimit:
+                                            errorMessage = "Servers are busy. Come back later"
+                                            showError = true
+                                        default:
+                                            errorMessage = "Unknown error occured"
+                                            showError = true
+                                        }
+                                    }
                                 }
-                            }
-                            withAnimation {
-                                showLikedToast = false
-                                showUnlikedToast = true
                             }
                         }
-                        
-                        
                     }
+                    
                 } label: {
                     Image(systemName: isHearted ? "heart.fill" : "heart")
                         .resizable()
@@ -179,6 +238,22 @@ struct ActionsView: View {
         .sheet(isPresented: $showPlaylists) {
             PlaylistView(auth: auth, showPlaylists: $showPlaylists, currSong: $currSong, showAddedToPlaylistToast: $showAddedToPlaylistToast)
         }
+        
+        .alert(isPresented: $showError) {
+            Alert(
+                title: Text("Error"),
+                message: Text(errorMessage),
+                dismissButton: .default(
+                            Text("OK"),
+                            action: {
+                                if authError {
+                                    audio.stopSound()
+                                    auth.logOut()
+                                }
+                            }
+                        )
+            )
+        }
     }
 }
 
@@ -191,6 +266,6 @@ struct Actions_Previews: PreviewProvider {
         @State var isHearted = false
         
         ActionsView(currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: Audio(), auth: Auth())
-
+        
     }
 }

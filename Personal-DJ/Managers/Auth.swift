@@ -55,7 +55,7 @@ class Auth: ObservableObject {
             
             let (data, response) = try await URLSession.shared.data(for: req)
             
-            print(response)
+//            print(response)
             
             let res = try JSONDecoder().decode(AccessTokenRes.self, from: data)
             
