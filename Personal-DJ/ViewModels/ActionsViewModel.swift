@@ -17,7 +17,7 @@ class ActionsViewModel {
                 return
             }
             
-            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer f" + token]
+            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer " + token]
             let reqBody = SaveSongReq(ids: [id])
             
             do {
@@ -48,6 +48,9 @@ class ActionsViewModel {
                             
                         case 403:
                             completion(.failure(SpotifyError.oathError))
+                        
+                        case 404:
+                            completion(.failure(SpotifyError.notFound))
                             
                         case 429:
                             completion(.failure(SpotifyError.rateLimit))

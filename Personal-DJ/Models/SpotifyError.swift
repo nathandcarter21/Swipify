@@ -11,6 +11,7 @@ enum SpotifyError: Error {
     case unauthorized
     case badReq
     case oathError
+    case notFound
     case rateLimit
     case unknown
 }

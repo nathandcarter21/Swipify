@@ -12,6 +12,9 @@ struct SongView: View {
     @State var isEnded = false
     @State var isHearted = false
     @State var currSong: Song?
+    @State var showError = false
+    @State var errorMessage = ""
+    @State var authError = false
     
     @ObservedObject var audio: Audio
     var auth: Auth
@@ -74,7 +77,7 @@ struct SongView: View {
                                     .font(.system(size: 20))
                                     .onAppear {
                                         
-//                                        audio.playSong(url: song.preview_url)
+                                        audio.playSong(url: song.preview_url)
                                         isPaused = false
                                         currSong = song
                                         
@@ -268,7 +271,7 @@ struct SongView: View {
             
             if !showEnd {
                 
-                ActionsView(currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: audio, auth: auth)
+                ActionsView(showError: $showError, errorMessage: $errorMessage, authError: $authError, currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: audio, auth: auth)
                 
             }
             
@@ -276,12 +279,115 @@ struct SongView: View {
         
         .onAppear {
             Task {
+                
+                guard let token = await auth.getAccessToken() else {
+                    errorMessage = "Could not validate your auth token. Please log back in."
+                    showError = true
+                    authError = true
+                    return
+                }
+                
                 if songViewModel.songs.count == 0 {
-                    if let token = await auth.getAccessToken() {
-                        songViewModel.loadSongs(token: token)
+                    songViewModel.loadSongs(token: token) { res in
+                        switch res {
+                            
+                        case .success():
+                            print("Successfully retrieved songs.")
+                            
+                        case .failure(let error):
+                            print(error)
+                            
+                            switch error {
+                                
+                            case SpotifyError.unauthorized:
+                                errorMessage = "Error authorizing your account. Please log back in."
+                                showError = true
+                                authError = true
+                                
+                            case SpotifyError.badReq:
+                                errorMessage = "Invalid Request"
+                                showError = true
+                                
+                            case SpotifyError.oathError:
+                                errorMessage = "OATH2.0 Error. Please log back in."
+                                showError = true
+                                authError = true
+                                
+                            case SpotifyError.notFound:
+                                errorMessage = "User not found"
+                                showError = true
+                                authError = true
+                                
+                            case SpotifyError.rateLimit:
+                                errorMessage = "Servers are busy. Come back later"
+                                showError = true
+                                
+                            default:
+                                errorMessage = "Unknown error occured"
+                                showError = true
+                            }
+                        }
+                    }
+                }
+                if auth.user == nil {
+                    auth.getUser(token: token) { res in
+                        switch res {
+                            
+                        case .success():
+                            print("Successfully retrieved user.")
+                            
+                        case .failure(let error):
+                            print(error)
+                            
+                            switch error {
+                                
+                            case SpotifyError.unauthorized:
+                                errorMessage = "Error authorizing your account. Please log back in."
+                                showError = true
+                                authError = true
+                                
+                            case SpotifyError.badReq:
+                                errorMessage = "Invalid Request"
+                                showError = true
+                                
+                            case SpotifyError.oathError:
+                                errorMessage = "OATH2.0 Error. Please log back in."
+                                showError = true
+                                authError = true
+                                
+                            case SpotifyError.notFound:
+                                errorMessage = "Song not found"
+                                showError = true
+                                authError = true
+                                
+                            case SpotifyError.rateLimit:
+                                errorMessage = "Servers are busy. Come back later"
+                                showError = true
+                                
+                            default:
+                                errorMessage = "Unknown error occured"
+                                showError = true
+                            }
+                        }
                     }
                 }
             }
+        }
+        
+        .alert(isPresented: $showError) {
+            Alert(
+                title: Text("Error"),
+                message: Text(errorMessage),
+                dismissButton: .default(
+                            Text("OK"),
+                            action: {
+                                if authError {
+                                    audio.stopSound()
+                                    auth.logOut()
+                                }
+                            }
+                        )
+            )
         }
         
     }

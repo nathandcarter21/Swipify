@@ -15,11 +15,10 @@ struct ActionsView: View {
     @State var showUnlikedToast = false
     @State var showPlaylists = false
     @State var showAddedToPlaylistToast = false
-    @State var showError = false
-    @State var errorMessage = ""
-    @State var authError = false
     
-    
+    @Binding var showError: Bool
+    @Binding var errorMessage: String
+    @Binding var authError: Bool
     @Binding var currSong: Song?
     @Binding var isPaused: Bool
     @Binding var isEnded: Bool
@@ -74,87 +73,106 @@ struct ActionsView: View {
                 Button {
                     if !isHearted {
                         Task {
-                            if let token = await auth.getAccessToken() {
-                                actionsViewModel.saveSongToLibrary(id: currSong?.id, token: token) { res in
-                                    switch res {
+                            guard let token = await auth.getAccessToken() else {
+                                errorMessage = "Could not validate your auth token. Please log back in."
+                                showError = true
+                                authError = true
+                                return
+                            }
+                            actionsViewModel.saveSongToLibrary(id: currSong?.id, token: token) { res in
+                                switch res {
+                                    
+                                case .success():
+                                    withAnimation {
+                                        isHearted.toggle()
+                                        showUnlikedToast = false
+                                        showLikedToast = true
+                                    }
+                                    
+                                case .failure(let error):
+                                    print(error)
+                                    switch error {
                                         
-                                    case .success():
-                                        withAnimation {
-                                            isHearted.toggle()
-                                            showUnlikedToast = false
-                                            showLikedToast = true
-                                        }
+                                    case SpotifyError.unauthorized:
+                                        errorMessage = "Error authorizing your account. Please log back in."
+                                        showError = true
+                                        authError = true
                                         
-                                    case .failure(let error):
-                                        print(error)
-                                        switch error {
-                                            
-                                        case SpotifyError.unauthorized:
-                                            errorMessage = "Error authorizing your account. Please log back in."
-                                            showError = true
-                                            authError = true
-                                            
-                                        case SpotifyError.badReq:
-                                            errorMessage = "Invalid Request"
-                                            showError = true
-                                            
-                                        case SpotifyError.oathError:
-                                            errorMessage = "OATH2.0 Error. Please log back in."
-                                            showError = true
-                                            authError = true
-                                            
-                                        case SpotifyError.rateLimit:
-                                            errorMessage = "Servers are busy. Come back later"
-                                            showError = true
-                                            
-                                        default:
-                                            errorMessage = "Unknown error occured"
-                                            showError = true
-                                        }
+                                    case SpotifyError.badReq:
+                                        errorMessage = "Invalid Request"
+                                        showError = true
+                                        
+                                    case SpotifyError.oathError:
+                                        errorMessage = "OATH2.0 Error. Please log back in."
+                                        showError = true
+                                        authError = true
+                                        
+                                    case SpotifyError.notFound:
+                                        errorMessage = "Song not found"
+                                        showError = true
+                                        
+                                    case SpotifyError.rateLimit:
+                                        errorMessage = "Servers are busy. Come back later"
+                                        showError = true
+                                        
+                                    default:
+                                        errorMessage = "Unknown error occured"
+                                        showError = true
                                     }
                                 }
                             }
-                            
                         }
-                    }else {
+                    } else {
                         Task {
-                            if let token = await auth.getAccessToken() {
-                                actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: token) { res in
-                                    switch res {
+                            guard let token = await auth.getAccessToken() else {
+                                errorMessage = "Could not validate your auth token. Please log back in."
+                                showError = true
+                                authError = true
+                                return
+                            }
+                            actionsViewModel.removeSongFromLibrary(id: currSong?.id, token: token) { res in
+                                switch res {
+                                    
+                                case .success():
+                                    withAnimation {
+                                        isHearted.toggle()
+                                        showLikedToast = false
+                                        showUnlikedToast = true
+                                    }
+                                    
+                                case .failure(let error):
+                                    print(error)
+                                    switch error {
+                                    case SpotifyError.unauthorized:
+                                        errorMessage = "Error authorizing your account. Please log back in."
+                                        showError = true
+                                        authError = true
                                         
-                                    case .success():
-                                        withAnimation {
-                                            isHearted.toggle()
-                                            showLikedToast = false
-                                            showUnlikedToast = true
-                                        }
+                                    case SpotifyError.badReq:
+                                        errorMessage = "Invalid Request"
+                                        showError = true
                                         
-                                    case .failure(let error):
-                                        print(error)
-                                        switch error {
-                                        case SpotifyError.unauthorized:
-                                            errorMessage = "Please log back in"
-                                            showError = true
-                                        case SpotifyError.badReq:
-                                            errorMessage = "Invalid Request"
-                                            showError = true
-                                        case SpotifyError.oathError:
-                                            errorMessage = "Please "
-                                            showError = true
-                                            
-                                        case SpotifyError.rateLimit:
-                                            errorMessage = "Servers are busy. Come back later"
-                                            showError = true
-                                        default:
-                                            errorMessage = "Unknown error occured"
-                                            showError = true
-                                        }
+                                    case SpotifyError.oathError:
+                                        errorMessage = "OATH2.0 Error. Please log back in."
+                                        showError = true
+                                        authError = true
+                                        
+                                    case SpotifyError.notFound:
+                                        errorMessage = "Song not found"
+                                        showError = true
+                                        
+                                    case SpotifyError.rateLimit:
+                                        errorMessage = "Servers are busy. Come back later"
+                                        showError = true
+                                        
+                                    default:
+                                        errorMessage = "Unknown error occured"
+                                        showError = true
                                     }
                                 }
                             }
                         }
                     }
-                    
                 } label: {
                     Image(systemName: isHearted ? "heart.fill" : "heart")
                         .resizable()
@@ -236,36 +254,24 @@ struct ActionsView: View {
         }
         
         .sheet(isPresented: $showPlaylists) {
-            PlaylistView(auth: auth, showPlaylists: $showPlaylists, currSong: $currSong, showAddedToPlaylistToast: $showAddedToPlaylistToast)
+            PlaylistView(auth: auth, showPlaylists: $showPlaylists, currSong: $currSong, showAddedToPlaylistToast: $showAddedToPlaylistToast, showError: $showError, errorMessage: $errorMessage, authError: $authError)
         }
         
-        .alert(isPresented: $showError) {
-            Alert(
-                title: Text("Error"),
-                message: Text(errorMessage),
-                dismissButton: .default(
-                            Text("OK"),
-                            action: {
-                                if authError {
-                                    audio.stopSound()
-                                    auth.logOut()
-                                }
-                            }
-                        )
-            )
-        }
     }
 }
 
 struct Actions_Previews: PreviewProvider {
     static var previews: some View {
-        
+
         @State var currSong: Song? = nil
         @State var isPaused = false
         @State var isEnded = false
         @State var isHearted = false
-        
-        ActionsView(currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: Audio(), auth: Auth())
-        
+        @State var showError = false
+        @State var errorMessage = ""
+        @State var authError = false
+
+        ActionsView(showError: $showError, errorMessage: $errorMessage, authError: $authError, currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: Audio(), auth: Auth())
+
     }
 }

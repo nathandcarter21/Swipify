@@ -13,7 +13,7 @@ class Auth: ObservableObject {
     var codeVerifier: String?
     var url = "https://accounts.spotify.com/authorize?response_type=code&client_id=815d77f6e74645738bf81edb150d456e&scope=user-top-read,user-read-private,user-read-email,user-library-read,user-library-modify,playlist-modify-public,playlist-modify-private&redirect_uri=https://github.com/nathandcarter21&code_challenge_method=S256&code_challenge="
     
-    func getAccessToken() async -> String? {
+    func getAccessToken() async -> String? {        
         let now = Date()
 
         if now > expires {
@@ -55,25 +55,58 @@ class Auth: ObservableObject {
             
             let (data, response) = try await URLSession.shared.data(for: req)
             
-//            print(response)
-            
-            let res = try JSONDecoder().decode(AccessTokenRes.self, from: data)
-            
-            if let token = res.access_token, let refresh = res.refresh_token {
-                self.saveToken(data: Data(token.utf8), service: "access_token", account: "spotify")
-                self.saveToken(data: Data(refresh.utf8), service: "refresh_token", account: "spotify")
-                return token
+            if let httpResponse = response as? HTTPURLResponse {
+
+                switch httpResponse.statusCode  {
+                    
+                case 200:
+                    do {
+                        let res = try JSONDecoder().decode(AccessTokenRes.self, from: data)
+                        
+                        if let token = res.access_token, let refresh = res.refresh_token {
+                            self.saveToken(data: Data(token.utf8), service: "access_token", account: "spotify")
+                            self.saveToken(data: Data(refresh.utf8), service: "refresh_token", account: "spotify")
+                            
+                            print("Successful token refresh")
+                            
+                            return token
+                        }
+                    }
+                    catch {
+                        print(SpotifyError.unknown)
+                    }
+                    
+                case 400:
+                    print(SpotifyError.badReq)
+
+                case 401:
+                    print(SpotifyError.unauthorized)
+
+                case 403:
+                    print(SpotifyError.oathError)
+
+                case 404:
+                    print(SpotifyError.notFound)
+
+                case 429:
+                    print(SpotifyError.rateLimit)
+
+                default:
+                    print(SpotifyError.unknown)
+
+                }
+            } else {
+                print(SpotifyError.unknown)
             }
-            
         }
-        catch{
+        catch {
             print(error)
         }
         
         return nil
     }
     
-    func requestToken(code:String){
+    func requestToken(code: String) {
         let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded"]
         var reqBody = URLComponents()
         reqBody.queryItems = [
@@ -91,25 +124,56 @@ class Auth: ObservableObject {
         
         URLSession.shared.dataTask(with: req){
             [weak self]
-            (data,response,error) in
-            guard let data = data, error == nil else {
-                print("ERROR: \(error!)")
-                return
+            data, res, error in
+            
+            if let error = error {
+                print(error)
             }
-            do {
-                let res = try JSONDecoder().decode(AccessTokenRes.self, from: data)
-                
-                if let token = res.access_token, let refresh = res.refresh_token {
-                    DispatchQueue.main.async {
-                        self?.signedIn = true
-                        self?.getUser(token: token)
-                        self?.saveToken(data: Data(token.utf8), service: "access_token", account: "spotify")
-                        self?.saveToken(data: Data(refresh.utf8), service: "refresh_token", account: "spotify")
+                        
+            if let httpResponse = res as? HTTPURLResponse {
+                switch httpResponse.statusCode  {
+                    
+                case 200:
+                    if let data = data {
+                        do {
+                            let res = try JSONDecoder().decode(AccessTokenRes.self, from: data)
+                            
+                            if let token = res.access_token, let refresh = res.refresh_token {
+                                DispatchQueue.main.async {
+                                    self?.signedIn = true
+                                    self?.saveToken(data: Data(token.utf8), service: "access_token", account: "spotify")
+                                    self?.saveToken(data: Data(refresh.utf8), service: "refresh_token", account: "spotify")
+                                }
+                            }
+                        }
+                        catch {
+                            print(SpotifyError.unknown)
+                        }
                     }
+                    else {
+                        print(SpotifyError.unknown)
+                    }
+                    
+                case 400:
+                    print(SpotifyError.badReq)
+                    
+                case 401:
+                    print(SpotifyError.unauthorized)
+
+                case 403:
+                    print(SpotifyError.oathError)
+
+                case 404:
+                    print(SpotifyError.notFound)
+
+                case 429:
+                    print(SpotifyError.rateLimit)
+
+                default:
+                    print(SpotifyError.unknown)
                 }
-            }
-            catch{
-                print("ERROR: \(error)")
+            } else {
+                print(SpotifyError.unknown)
             }
         }.resume()
     }
@@ -153,7 +217,7 @@ class Auth: ObservableObject {
             
             if updateStatus == errSecSuccess {
                 DispatchQueue.main.async {
-                    self.expires = Date(timeIntervalSinceNow: 3500)
+                    self.expires = Date(timeIntervalSinceNow: 15)
                 }
 //                print("Value Saved Successfully")
             } else {
@@ -162,7 +226,7 @@ class Auth: ObservableObject {
         } else{
             SecItemAdd(query, nil)
             DispatchQueue.main.async {
-                self.expires = Date(timeIntervalSinceNow: 3500)
+                self.expires = Date(timeIntervalSinceNow: 15)
             }
         }
     }
@@ -197,7 +261,10 @@ class Auth: ObservableObject {
         }
     }
     
-    func getUser(token: String) {
+    func getUser(token: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        guard self.user == nil else { return }
+        
         guard let url = URL(string: "https://api.spotify.com/v1/me") else {
             return
         }
@@ -210,30 +277,56 @@ class Auth: ObservableObject {
         URLSession.shared.dataTask(with: req){
             [weak self]
             data, res, error in
-            guard let data = data, error == nil else {
-                return
+                        
+            if let error = error {
+                completion(.failure(error))
             }
-            do {
-                
-//                print("JSON")
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                if let responseJSON = responseJSON as? [String: Any] {
-//                    print(responseJSON)
-//                }
-
-                let res = try JSONDecoder().decode(User.self, from: data)
-                DispatchQueue.main.async {
-                    self?.user = res
-                    self?.getPlaylists(token: token)
+            
+            if let httpResponse = res as? HTTPURLResponse {
+                switch httpResponse.statusCode  {
+                    
+                case 200:
+                    if let data = data {
+                        do {
+                            let res = try JSONDecoder().decode(User.self, from: data)
+                            DispatchQueue.main.async {
+                                self?.user = res
+                                self?.getPlaylists(token: token, completion: completion)
+                            }
+                        }
+                        catch {
+                            completion(.failure(SpotifyError.unknown))
+                        }
+                    }
+                    else {
+                        completion(.failure(SpotifyError.unknown))
+                    }
+                    
+                case 400:
+                    completion(.failure(SpotifyError.badReq))
+                    
+                case 401:
+                    completion(.failure(SpotifyError.unauthorized))
+                    
+                case 403:
+                    completion(.failure(SpotifyError.oathError))
+                    
+                case 404:
+                    completion(.failure(SpotifyError.notFound))
+                    
+                case 429:
+                    completion(.failure(SpotifyError.rateLimit))
+                    
+                default:
+                    completion(.failure(SpotifyError.unknown))
                 }
-            }
-            catch{
-                print("ERROR\(error)")
+            } else {
+                completion(.failure(SpotifyError.unknown))
             }
         }.resume()
     }
     
-    func getPlaylists(token: String) {
+    func getPlaylists(token: String, completion: @escaping ((Result<Void, Error>) -> Void)) {
         
         guard let url = URL(string: "https://api.spotify.com/v1/me/playlists?limit=50") else {
             return
@@ -247,24 +340,50 @@ class Auth: ObservableObject {
         URLSession.shared.dataTask(with: req){
             [weak self]
             data, res, error in
-            guard let data = data, error == nil else {
-                return
+            if let error = error {
+                completion(.failure(error))
             }
-            do {
+                        
+            if let httpResponse = res as? HTTPURLResponse {
+                switch httpResponse.statusCode  {
+                    
+                case 200:
+                    if let data = data {
+                        do {
+                            let res = try JSONDecoder().decode(UserPlaylistsRes.self, from: data)
+                            DispatchQueue.main.async {
+                                completion(.success(()))
+                                self?.playlists = res.items
+                            }
+                        }
+                        catch {
+                            completion(.failure(SpotifyError.unknown))
+                        }
+                    }
+                    else {
+                        completion(.failure(SpotifyError.unknown))
+                    }
+                    
+                case 400:
+                    completion(.failure(SpotifyError.badReq))
+                    
+                case 401:
+                    completion(.failure(SpotifyError.unauthorized))
+                    
+                case 403:
+                    completion(.failure(SpotifyError.oathError))
+                    
+                case 404:
+                    completion(.failure(SpotifyError.notFound))
+                    
+                case 429:
+                    completion(.failure(SpotifyError.rateLimit))
                 
-                //                print("JSON")
-                //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                //                if let responseJSON = responseJSON as? [String: Any] {
-                //                    print(responseJSON)
-                //                }
-                
-                let res = try JSONDecoder().decode(UserPlaylistsRes.self, from: data)
-                DispatchQueue.main.async {
-                    self?.playlists = res.items?.filter { $0.owner.id == self?.user?.id } ?? []
+                default:
+                    completion(.failure(SpotifyError.unknown))
                 }
-            }
-            catch{
-                print("ERROR\(error)")
+            } else {
+                completion(.failure(SpotifyError.unknown))
             }
         }.resume()
     }

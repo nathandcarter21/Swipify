@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		58620F6A2A1729170098F35A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58620F692A1729170098F35A /* Error.swift */; };
+		5840E25D2A1883D000959819 /* RecommendedSongsRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5840E25C2A1883D000959819 /* RecommendedSongsRes.swift */; };
+		58620F6A2A1729170098F35A /* SpotifyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58620F692A1729170098F35A /* SpotifyError.swift */; };
 		58673AFB2A115B7E00B2829B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFA2A115B7E00B2829B /* User.swift */; };
 		58673AFF2A1168F000B2829B /* SaveSongReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFE2A1168F000B2829B /* SaveSongReq.swift */; };
 		58673B012A116A5F00B2829B /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673B002A116A5F00B2829B /* ActionsViewModel.swift */; };
@@ -40,7 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		58620F692A1729170098F35A /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		5840E25C2A1883D000959819 /* RecommendedSongsRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSongsRes.swift; sourceTree = "<group>"; };
+		58620F692A1729170098F35A /* SpotifyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyError.swift; sourceTree = "<group>"; };
 		58673AFA2A115B7E00B2829B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		58673AFE2A1168F000B2829B /* SaveSongReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSongReq.swift; sourceTree = "<group>"; };
 		58673B002A116A5F00B2829B /* ActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				589127D52A0F05AF00CA0B0C /* AccessTokenRes.swift */,
 				58E526E92A119F99006535FB /* UserPlaylistsRes.swift */,
 				58DECE682A131C3800142906 /* TopSongsRes.swift */,
+				5840E25C2A1883D000959819 /* RecommendedSongsRes.swift */,
 			);
 			path = Res;
 			sourceTree = "<group>";
@@ -163,10 +166,10 @@
 				58DECE6A2A131EC700142906 /* Album.swift */,
 				58DECE742A13239C00142906 /* ExplicitContent.swift */,
 				58DECE6E2A1321D500142906 /* SpotifyImage.swift */,
+				58620F692A1729170098F35A /* SpotifyError.swift */,
 				589127C92A0ED6E100CA0B0C /* Song.swift */,
 				58DECE722A13226D00142906 /* Playlist.swift */,
 				58673AFA2A115B7E00B2829B /* User.swift */,
-				58620F692A1729170098F35A /* Error.swift */,
 				58673AFD2A1168DD00B2829B /* Req */,
 				58673AFC2A11654100B2829B /* Res */,
 			);
@@ -275,7 +278,7 @@
 				58DECE692A131C3800142906 /* TopSongsRes.swift in Sources */,
 				589127C72A0ED29D00CA0B0C /* ActionsView.swift in Sources */,
 				58DECE772A13247E00142906 /* AddSongReq.swift in Sources */,
-				58620F6A2A1729170098F35A /* Error.swift in Sources */,
+				58620F6A2A1729170098F35A /* SpotifyError.swift in Sources */,
 				589127C32A0ED26D00CA0B0C /* HomeView.swift in Sources */,
 				58E526F02A11AA61006535FB /* PlaylistViewModel.swift in Sources */,
 				58DECE6D2A131FBD00142906 /* APIError.swift in Sources */,
@@ -287,6 +290,7 @@
 				589127DC2A0F0E2600CA0B0C /* SongViewModel.swift in Sources */,
 				589127CA2A0ED6E100CA0B0C /* Song.swift in Sources */,
 				58DECE6B2A131EC700142906 /* Album.swift in Sources */,
+				5840E25D2A1883D000959819 /* RecommendedSongsRes.swift in Sources */,
 				589127D42A0F056800CA0B0C /* Auth.swift in Sources */,
 				58DECE712A1321F600142906 /* Artist.swift in Sources */,
 				58E526EA2A119F99006535FB /* UserPlaylistsRes.swift in Sources */,

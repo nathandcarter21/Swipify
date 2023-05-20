@@ -15,6 +15,9 @@ struct PlaylistView: View {
     @Binding var showPlaylists: Bool
     @Binding var currSong: Song?
     @Binding var showAddedToPlaylistToast: Bool
+    @Binding var showError: Bool
+    @Binding var errorMessage: String
+    @Binding var authError: Bool
     
     
     var body: some View {
@@ -43,10 +46,53 @@ struct PlaylistView: View {
                             
                             Button {
                                 Task {
-                                    if let token = await auth.getAccessToken() {
-                                        playlistViewModel.addSongToPlaylist(token: token, song: currSong?.uri, playlist: playlist.id)
-                                        showPlaylists.toggle()
-                                        showAddedToPlaylistToast = true
+                                    guard let token = await auth.getAccessToken() else {
+                                        errorMessage = "Could not validate your auth token. Please log back in."
+                                        showError = true
+                                        authError = true
+                                        return
+                                    }
+                                    playlistViewModel.addSongToPlaylist(token: token, song: currSong?.uri, playlist: playlist.id) { res in
+                                        switch res {
+                                            
+                                        case .success():
+                                            withAnimation {
+                                                showPlaylists.toggle()
+                                                showAddedToPlaylistToast = true
+                                            }
+                                            
+                                        case .failure(let error):
+                                            print(error)
+                                            showPlaylists.toggle()
+                                            switch error {
+                                                
+                                            case SpotifyError.unauthorized:
+                                                errorMessage = "Error authorizing your account. Please log back in"
+                                                showError = true
+                                                authError = true
+                                                
+                                            case SpotifyError.badReq:
+                                                errorMessage = "Invalid Request"
+                                                showError = true
+                                                
+                                            case SpotifyError.oathError:
+                                                errorMessage = "OATH2.0 Error. Please log back in"
+                                                showError = true
+                                                authError = true
+                                                
+                                            case SpotifyError.notFound:
+                                                errorMessage = "Playlist not found"
+                                                showError = true
+                                                
+                                            case SpotifyError.rateLimit:
+                                                errorMessage = "Servers are busy. Come back later"
+                                                showError = true
+                                                
+                                            default:
+                                                errorMessage = "Unknown error occured"
+                                                showError = true
+                                            }
+                                        }
                                     }
                                 }
                             } label: {
@@ -103,6 +149,10 @@ struct PlaylistView_Previews: PreviewProvider {
         @State var show = true
         @State var toast = false
         @State var currSong: Song? = nil
-        PlaylistView(auth: Auth(), showPlaylists: $show, currSong: $currSong, showAddedToPlaylistToast: $toast)
+        @State var showError = false
+        @State var errorMessage = ""
+        @State var authError = false
+        
+        PlaylistView(auth: Auth(), showPlaylists: $show, currSong: $currSong, showAddedToPlaylistToast: $toast, showError: $showError, errorMessage: $errorMessage, authError: $authError)
     }
 }
