@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 struct SongView: View {
     
@@ -6,7 +7,6 @@ struct SongView: View {
     
     @State var offset: CGSize = .zero
     @State var showInfo = false
-    @State var showEnd = false
     
     @State var isPaused = true
     @State var isEnded = false
@@ -26,254 +26,246 @@ struct SongView: View {
         VStack(spacing: 0) {
             
             ZStack {
-                
-                if showEnd {
-                    
-                    Text("That's all of your songs for today!")
-                        .frame(width: 300,height: 300)
-                        .background(Color.black)
-                        .foregroundColor(Color.white)
-                        .padding(.bottom, 50)
-                    
-                    
+                if songViewModel.songs.isEmpty {
+                    ProgressView()
+                        .frame(width: 300, height: 300)
+                        .background(Color("AppGray"))
+                        .padding(.bottom, 60)
+
                 }
                 
-                ForEach(Array(self.songViewModel.songs.enumerated()), id: \.element) { index, song in
-                    
-                    VStack {
+                else {
+                    ForEach(Array(self.songViewModel.songs.enumerated()), id: \.element) { index, song in
                         
-                        if index == songViewModel.songs.count - 1 && showInfo {
+                        VStack {
                             
-                            HStack {
+                            if index == songViewModel.songs.count - 1 && showInfo {
+                                
+                                HStack {
+                                    
+                                    Button {
+                                        
+                                        withAnimation {
+                                            showInfo.toggle()
+                                        }
+                                        
+                                    } label: {
+                                        
+                                        Image(systemName: "xmark")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                        
+                                    }
+                                    .buttonStyle(.plain)
+                                    .offset(x: 180, y: 23)
+                                    
+                                }
+                                .frame(height: 0)
+                                
+                            }
+                            
+                            if index == songViewModel.songs.count - 1 {
+                                
+                                HStack {
+                                    
+                                    Text(song.name)
+                                        .frame(maxWidth: 300, alignment: .leading)
+                                        .bold()
+                                        .font(.system(size: 20))
+                                        .onAppear {
+                                            
+                                            audio.playSong(url: song.preview_url)
+                                            isPaused = false
+                                            currSong = song
+                                            
+                                        }
+                                    
+                                    Spacer()
+                                    
+                                    Image("Spotify_Icon_Black_Coated")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                    
+                                }
+                                .frame(width: 300)
+                                
+                            }
+                            
+                            AsyncImage(url: URL(string: song.album.images[0].url), content: { returnedImage in
+                                
+                                returnedImage
+                                    .resizable()
+                                    .frame(width: 300, height: 300)
+                                    .opacity(index == songViewModel.songs.count - 1 ? 1 : 0)
+                                
+                            }, placeholder: {
+                                
+                                ProgressView()
+                                    .frame(width: 300, height: 300)
+                                    .background(Color("AppGray"))
+                                    .opacity(index == songViewModel.songs.count - 1 ? 1 : 0)
+                                
+                            })
+                            .onTapGesture {
+                                
+                                withAnimation {
+                                    
+                                    showInfo.toggle()
+                                    
+                                }
+                                
+                            }
+                            
+                            if showInfo {
+                                
+                                Spacer()
+                                
+                            }
+                            
+                            
+                            if index == songViewModel.songs.count - 1 {
+                                
+                                HStack(spacing: 0) {
+                                    
+                                    if showInfo {
+                                        
+                                        Text("Artist - ")
+                                            .bold()
+                                            .font(.system(size: 20))
+                                        
+                                    }
+                                    
+                                    Text(song.album.artists[0].name)
+                                        .font(.system(size: 20))
+                                    
+                                }
+                                .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
+                                
+                            }
+                            
+                            if showInfo && songViewModel.songs.count - 1 == index {
+                                
+                                Spacer()
+                                
+                                HStack(spacing: 0) {
+                                    
+                                    if showInfo {
+                                        
+                                        Text("Album - ")
+                                            .bold()
+                                            .font(.system(size: 20))
+                                        
+                                    }
+                                    
+                                    Text(song.album.name)
+                                        .font(.system(size: 20))
+                                    
+                                }
+                                .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
+                                
+                                Spacer()
+                                
+                                HStack(spacing: 0) {
+                                    
+                                    if showInfo {
+                                        
+                                        Text("Popularity - ")
+                                            .bold()
+                                            .font(.system(size: 20))
+                                        
+                                    }
+                                    
+                                    Text("\(song.popularity ?? 50)")
+                                        .font(.system(size: 20))
+                                    
+                                }
+                                .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
+                                
+                                Spacer()
+                                
+                                HStack(spacing: 0) {
+                                    
+                                    if showInfo {
+                                        
+                                        Text("Release Date - ")
+                                            .bold()
+                                            .font(.system(size: 20))
+                                        
+                                    }
+                                    
+                                    Text(song.album.release_date ?? "never")
+                                        .font(.system(size: 20))
+                                    
+                                }
+                                .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
+                                
+                                Spacer()
                                 
                                 Button {
                                     
-                                    withAnimation {
-                                        showInfo.toggle()
+                                    if let uri = URL(string: song.uri) {
+                                        
+                                        UIApplication.shared.open(uri)
+                                        
                                     }
                                     
                                 } label: {
                                     
-                                    Image(systemName: "xmark")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
+                                    Text("Listen On Spotify")
+                                        .frame(width: 300, height: 60)
+                                        .background(Color("Spotify"))
+                                        .cornerRadius(10)
+                                        .foregroundColor(Color.white)
+                                        .font(.system(size: 20))
                                     
                                 }
                                 .buttonStyle(.plain)
-                                .offset(x: 180, y: 23)
-                                
-                            }
-                            .frame(height: 0)
-                            
-                        }
-                        
-                        if index == songViewModel.songs.count - 1 {
-                            
-                            HStack {
-                                
-                                Text(song.name)
-                                    .frame(maxWidth: 300, alignment: .leading)
-                                    .bold()
-                                    .font(.system(size: 20))
-                                    .onAppear {
-                                        
-                                        audio.playSong(url: song.preview_url)
-                                        isPaused = false
-                                        currSong = song
-                                        
-                                    }
                                 
                                 Spacer()
-                                                                    
-                                    Image("Spotify_Icon_Black_Coated")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                                                    
-                            }
-                            .frame(width: 300)
-                                
-                        }
-                        
-                        AsyncImage(url: URL(string: song.album.images[0].url), content: { returnedImage in
-                            
-                            returnedImage
-                                .resizable()
-                                .frame(width: 300, height: 300)
-                                .opacity(index == songViewModel.songs.count - 1 ? 1 : 0)
-                            
-                        }, placeholder: {
-                            
-                            ProgressView()
-                                .frame(width: 300, height: 300)
-                                .background(Color("AppGray"))
-                                .opacity(index == songViewModel.songs.count - 1 ? 1 : 0)
-                            
-                        })
-                        .onTapGesture {
-                            
-                            withAnimation {
-                                
-                                showInfo.toggle()
-                                
                             }
                             
                         }
-                        
-                        if showInfo {
-                            
-                            Spacer()
-                            
+                        .padding(.bottom, showInfo ? 0 : 50)
+                        .scaleEffect(index == self.songViewModel.songs.count - 1 ? getScaleEffect() : 1)
+                        .rotationEffect(index == self.songViewModel.songs.count - 1 ? Angle(degrees: getRotationEffect()) : .zero)
+                        .offset(index == self.songViewModel.songs.count - 1 ? offset : .zero)
+                        .onReceive(pub) { _ in
+                            isEnded = true
                         }
-                        
-                        
-                        if index == songViewModel.songs.count - 1 {
-                            
-                            HStack(spacing: 0) {
+                        .gesture(DragGesture()
+                                 
+                            .onChanged{ value in
                                 
-                                if showInfo {
+                                if !showInfo {
                                     
-                                    Text("Artist - ")
-                                        .bold()
-                                        .font(.system(size: 20))
+                                    withAnimation {
+                                        
+                                        offset = value.translation
+                                        
+                                    }
+                                    
+                                }
+                            }
+                            .onEnded { value in
+                                
+                                if !showInfo {
+                                    
+                                    withAnimation {
+                                        
+                                        handleSwipe()
+                                        
+                                    }
                                     
                                 }
                                 
-                                Text(song.album.artists[0].name)
-                                    .font(.system(size: 20))
-                                
                             }
-                            .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
-                            
-                        }
-                        
-                        if showInfo && songViewModel.songs.count - 1 == index {
-                            
-                            Spacer()
-                            
-                            HStack(spacing: 0) {
-                                
-                                if showInfo {
-                                    
-                                    Text("Album - ")
-                                        .bold()
-                                        .font(.system(size: 20))
-                                    
-                                }
-                                
-                                Text(song.album.name)
-                                    .font(.system(size: 20))
-                                
-                            }
-                            .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
-                            
-                            Spacer()
-                            
-                            HStack(spacing: 0) {
-                                
-                                if showInfo {
-                                    
-                                    Text("Popularity - ")
-                                        .bold()
-                                        .font(.system(size: 20))
-                                    
-                                }
-                                
-                                Text("\(song.popularity ?? 50)")
-                                    .font(.system(size: 20))
-                                
-                            }
-                            .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
-                            
-                            Spacer()
-                            
-                            HStack(spacing: 0) {
-                                
-                                if showInfo {
-                                    
-                                    Text("Release Date - ")
-                                        .bold()
-                                        .font(.system(size: 20))
-                                    
-                                }
-                                
-                                Text(song.album.release_date ?? "never")
-                                    .font(.system(size: 20))
-                                
-                            }
-                            .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
-                            
-                            Spacer()
-                            
-                            Button {
-                                
-                                if let uri = URL(string: song.uri) {
-                                    
-                                    UIApplication.shared.open(uri)
-                                    
-                                }
-                                
-                            } label: {
-                                
-                                Text("Listen On Spotify")
-                                    .frame(width: 300, height: 60)
-                                    .background(Color("Spotify"))
-                                    .cornerRadius(10)
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 20))
-                                
-                            }
-                            .buttonStyle(.plain)
-                            
-                            Spacer()
-                        }
-                        
+                                 
+                        )
                     }
-                    .padding(.bottom, showInfo ? 0 : 50)
-                    .scaleEffect(index == self.songViewModel.songs.count - 1 ? getScaleEffect() : 1)
-                    .rotationEffect(index == self.songViewModel.songs.count - 1 ? Angle(degrees: getRotationEffect()) : .zero)
-                    .offset(index == self.songViewModel.songs.count - 1 ? offset : .zero)
-                    .onReceive(pub) { _ in
-                        isEnded = true
-                    }
-                    .gesture(DragGesture()
-                             
-                        .onChanged{ value in
-                            
-                            if !showInfo {
-                                
-                                withAnimation {
-                                    
-                                    offset = value.translation
-                                    
-                                }
-                                
-                            }
-                        }
-                        .onEnded { value in
-                            
-                            if !showInfo {
-                                
-                                withAnimation {
-                                    
-                                    handleSwipe()
-                                    
-                                }
-                                
-                            }
-                            
-                        }
-                             
-                    )
-                    
                 }
-                
             }
             
-            if !showEnd {
-                
-                ActionsView(showError: $showError, errorMessage: $errorMessage, authError: $authError, currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: audio, auth: auth)
-                
-            }
+            ActionsView(showError: $showError, errorMessage: $errorMessage, authError: $authError, currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: audio, auth: auth)
             
         }
         
@@ -288,6 +280,7 @@ struct SongView: View {
                 }
                 
                 if songViewModel.songs.count == 0 {
+                    
                     songViewModel.loadSongs(token: token) { res in
                         switch res {
                             
@@ -379,14 +372,14 @@ struct SongView: View {
                 title: Text("Error"),
                 message: Text(errorMessage),
                 dismissButton: .default(
-                            Text("OK"),
-                            action: {
-                                if authError {
-                                    audio.stopSound()
-                                    auth.logOut()
-                                }
-                            }
-                        )
+                    Text("OK"),
+                    action: {
+                        if authError {
+                            audio.stopSound()
+                            auth.logOut()
+                        }
+                    }
+                )
             )
         }
         
@@ -398,19 +391,62 @@ struct SongView: View {
             
             if offset.width < -150 {
                 
-                isPaused = true
+//                isPaused = true
                 isHearted = false
                 isEnded = false
                 songViewModel.songs.removeLast()
                 
                 if songViewModel.songs.count == 0 {
-                    showEnd = true
-//                    audio.pauseSound()
+                    audio.pauseSound()
+                    Task {
+                        if let token = await auth.getAccessToken() {
+                            songViewModel.loadSongs(token: token) { res in
+                                switch res {
+                                    
+                                case .success():
+                                    print("Successfully retrieved songs.")
+                                    
+                                case .failure(let error):
+                                    print(error)
+                                    
+                                    switch error {
+                                        
+                                    case SpotifyError.unauthorized:
+                                        errorMessage = "Error authorizing your account. Please log back in."
+                                        showError = true
+                                        authError = true
+                                        
+                                    case SpotifyError.badReq:
+                                        errorMessage = "Invalid Request"
+                                        showError = true
+                                        
+                                    case SpotifyError.oathError:
+                                        errorMessage = "OATH2.0 Error. Please log back in."
+                                        showError = true
+                                        authError = true
+                                        
+                                    case SpotifyError.notFound:
+                                        errorMessage = "User not found"
+                                        showError = true
+                                        authError = true
+                                        
+                                    case SpotifyError.rateLimit:
+                                        errorMessage = "Servers are busy. Come back later"
+                                        showError = true
+                                        
+                                    default:
+                                        errorMessage = "Unknown error occured"
+                                        showError = true
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 
             } else if offset.width > 150 {
                 
-//                isHearted.toggle()
+                //                isHearted.toggle()
                 
             }
             

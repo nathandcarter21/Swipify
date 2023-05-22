@@ -21,6 +21,15 @@ struct ViewSwitcher: View {
         
         else {
             HomeView(auth: auth)
+                .onAppear {                    
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            print("SUCCESS")
+                        } else if let error = error {
+                            print(error)
+                        }
+                    }
+                }
         }
     }
 }

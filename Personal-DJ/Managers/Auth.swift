@@ -53,9 +53,9 @@ class Auth: ObservableObject {
         
         do {
             
-            let (data, response) = try await URLSession.shared.data(for: req)
+            let (data, res) = try await URLSession.shared.data(for: req)
             
-            if let httpResponse = response as? HTTPURLResponse {
+            if let httpResponse = res as? HTTPURLResponse {
 
                 switch httpResponse.statusCode  {
                     
@@ -217,7 +217,7 @@ class Auth: ObservableObject {
             
             if updateStatus == errSecSuccess {
                 DispatchQueue.main.async {
-                    self.expires = Date(timeIntervalSinceNow: 15)
+                    self.expires = Date(timeIntervalSinceNow: 3500)
                 }
 //                print("Value Saved Successfully")
             } else {
@@ -226,7 +226,7 @@ class Auth: ObservableObject {
         } else{
             SecItemAdd(query, nil)
             DispatchQueue.main.async {
-                self.expires = Date(timeIntervalSinceNow: 15)
+                self.expires = Date(timeIntervalSinceNow: 3500)
             }
         }
     }
