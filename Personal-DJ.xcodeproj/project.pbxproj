@@ -12,6 +12,8 @@
 		58673AFB2A115B7E00B2829B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFA2A115B7E00B2829B /* User.swift */; };
 		58673AFF2A1168F000B2829B /* SaveSongReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFE2A1168F000B2829B /* SaveSongReq.swift */; };
 		58673B012A116A5F00B2829B /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673B002A116A5F00B2829B /* ActionsViewModel.swift */; };
+		588C1EDB2A1C33D800035FC1 /* CreatePlaylistReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588C1EDA2A1C33D800035FC1 /* CreatePlaylistReq.swift */; };
+		588C1EDD2A1C344300035FC1 /* CreatePlaylistRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588C1EDC2A1C344300035FC1 /* CreatePlaylistRes.swift */; };
 		589127B42A0ED19400CA0B0C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127B32A0ED19400CA0B0C /* App.swift */; };
 		589127B82A0ED19500CA0B0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127B72A0ED19500CA0B0C /* Assets.xcassets */; };
 		589127BB2A0ED19500CA0B0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589127BA2A0ED19500CA0B0C /* Preview Assets.xcassets */; };
@@ -46,6 +48,8 @@
 		58673AFA2A115B7E00B2829B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		58673AFE2A1168F000B2829B /* SaveSongReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSongReq.swift; sourceTree = "<group>"; };
 		58673B002A116A5F00B2829B /* ActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
+		588C1EDA2A1C33D800035FC1 /* CreatePlaylistReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistReq.swift; sourceTree = "<group>"; };
+		588C1EDC2A1C344300035FC1 /* CreatePlaylistRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistRes.swift; sourceTree = "<group>"; };
 		589127B02A0ED19400CA0B0C /* Personal-DJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal-DJ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		589127B32A0ED19400CA0B0C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		589127B72A0ED19500CA0B0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 				58E526E92A119F99006535FB /* UserPlaylistsRes.swift */,
 				58DECE682A131C3800142906 /* TopSongsRes.swift */,
 				5840E25C2A1883D000959819 /* RecommendedSongsRes.swift */,
+				588C1EDC2A1C344300035FC1 /* CreatePlaylistRes.swift */,
 			);
 			path = Res;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 			children = (
 				58673AFE2A1168F000B2829B /* SaveSongReq.swift */,
 				58DECE762A13247E00142906 /* AddSongReq.swift */,
+				588C1EDA2A1C33D800035FC1 /* CreatePlaylistReq.swift */,
 			);
 			path = Req;
 			sourceTree = "<group>";
@@ -284,6 +290,8 @@
 				58DECE6D2A131FBD00142906 /* APIError.swift in Sources */,
 				589127DA2A0F0BCF00CA0B0C /* Audio.swift in Sources */,
 				589127CC2A0EE28800CA0B0C /* SettingsView.swift in Sources */,
+				588C1EDD2A1C344300035FC1 /* CreatePlaylistRes.swift in Sources */,
+				588C1EDB2A1C33D800035FC1 /* CreatePlaylistReq.swift in Sources */,
 				589127B42A0ED19400CA0B0C /* App.swift in Sources */,
 				589127D82A0F065500CA0B0C /* SignInViewModel.swift in Sources */,
 				58E526EE2A11A458006535FB /* PlaylistView.swift in Sources */,

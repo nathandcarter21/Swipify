@@ -11,6 +11,158 @@ class SongViewModel: ObservableObject {
         self.songs = songs.reversed()
     }
     
+    func rightSwipeSong(token: String, song: String?, playlists: [Playlist]?, user: User?, completion: @escaping ((Result<Bool, Error>) -> Void)) {
+        guard let song = song, let user = user else {
+            completion(.failure(SpotifyError.unknown))
+            return
+        }
+        
+        if let playlists = playlists {
+                        
+            for playlist in playlists {
+                if playlist.name == "Personal Picks" {
+                    addSongToPlaylist(token: token, song: song, playlist: playlist.id, newPlaylist: false, completion: completion) 
+                    return
+                }
+            }
+        }
+        
+        createPlaylist(token: token, song: song, user: user.id, completion: completion)
+    }
+    
+    func createPlaylist(token: String, song: String, user: String?, completion: @escaping ((Result<Bool, Error>) -> Void)) {
+        guard let user = user else {
+            completion(.failure(SpotifyError.unknown))
+            return
+        }
+        
+        guard let url = URL(string: "https://api.spotify.com/v1/users/\(user)/playlists") else {
+            completion(.failure(SpotifyError.unknown))
+            return
+        }
+        
+        let reqHeaders : [String: String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer " + token]
+        let reqBody = CreatePlaylistReq()
+        
+        do {
+            let jsonBody = try JSONEncoder().encode(reqBody)
+            var req = URLRequest(url: url)
+            req.httpMethod = "POST"
+            req.allHTTPHeaderFields = reqHeaders
+            req.httpBody = jsonBody
+            
+            URLSession.shared.dataTask(with: req){ [self]
+                data, res, error in
+                if let error = error {
+                completion(.failure(error))
+            }
+            
+            if let httpResponse = res as? HTTPURLResponse, let data = data {
+                switch httpResponse.statusCode  {
+                    
+                case 201:
+                    do {
+                        let res = try JSONDecoder().decode(CreatePlaylistRes.self, from: data)
+                        if let error = res.error {
+                            print(error)
+                            completion(.failure(SpotifyError.unknown))
+                        }
+                        if let playlistID = res.id {
+                            self.addSongToPlaylist(token: token, song: song, playlist: playlistID, newPlaylist: true, completion: completion)
+                        } else {
+                            completion(.failure(SpotifyError.unknown))
+                        }
+                    } catch {
+                        completion(.failure(error))
+                    }
+                    
+                case 400:
+                    completion(.failure(SpotifyError.badReq))
+                    
+                case 401:
+                    completion(.failure(SpotifyError.unauthorized))
+                    
+                case 403:
+                    completion(.failure(SpotifyError.oathError))
+                    
+                case 404:
+                    completion(.failure(SpotifyError.notFound))
+                    
+                case 429:
+                    completion(.failure(SpotifyError.rateLimit))
+                
+                default:
+                    completion(.failure(SpotifyError.unknown))
+                }
+            }
+                
+            }.resume()
+        }
+        catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func addSongToPlaylist(token: String, song: String?, playlist: String?, newPlaylist: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {
+        if let song = song, let playlist = playlist {
+            
+            guard let url = URL(string: "https://api.spotify.com/v1/playlists/\(playlist)/tracks") else {
+                completion(.failure(SpotifyError.unknown))
+                return
+            }
+            
+            let reqHeaders : [String:String] = ["Content-Type": "application/x-www-form-urlencoded", "Authorization": "Bearer " + token]
+            let reqBody = AddSongReq(uris: [song])
+            
+            do {
+                let jsonBody = try JSONEncoder().encode(reqBody)
+                var req = URLRequest(url:url)
+                req.httpMethod = "POST"
+                req.allHTTPHeaderFields = reqHeaders
+                req.httpBody = jsonBody
+                
+                URLSession.shared.dataTask(with: req){
+                    data, res, error in
+                    if let error = error {
+                    completion(.failure(error))
+                }
+                
+                if let httpResponse = res as? HTTPURLResponse {
+                    switch httpResponse.statusCode  {
+                        
+                    case 201:
+                        completion(.success(newPlaylist))
+                        
+                    case 400:
+                        completion(.failure(SpotifyError.badReq))
+                        
+                    case 401:
+                        completion(.failure(SpotifyError.unauthorized))
+                        
+                    case 403:
+                        completion(.failure(SpotifyError.oathError))
+                        
+                    case 404:
+                        completion(.failure(SpotifyError.notFound))
+                        
+                    case 429:
+                        completion(.failure(SpotifyError.rateLimit))
+                    
+                    default:
+                        completion(.failure(SpotifyError.unknown))
+                    }
+                }
+                    
+                }.resume()
+                
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
+    
     func getRecommendedSongs(token: String, seeds: [Song], completion: @escaping ((Result<Void, Error>) -> Void)) {
         let base = "https://api.spotify.com/v1/recommendations?limit=50&seed_tracks="
         

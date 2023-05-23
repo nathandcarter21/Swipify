@@ -26,6 +26,7 @@ struct SongView: View {
         VStack(spacing: 0) {
             
             ZStack {
+                
                 if songViewModel.songs.isEmpty {
                     ProgressView()
                         .frame(width: 300, height: 300)
@@ -446,8 +447,95 @@ struct SongView: View {
                 
             } else if offset.width > 150 {
                 
-                //                isHearted.toggle()
-                
+                isHearted = false
+                isEnded = false
+                let currSong = songViewModel.songs.last
+                Task {
+                    if let token = await auth.getAccessToken() {
+                        songViewModel.rightSwipeSong(token: token, song: currSong?.uri, playlists: auth.playlists, user: auth.user) { res in
+                            switch res {
+                                
+                            case .success(let newPlaylist):
+                                if newPlaylist {
+                                    auth.getPlaylists(token: token) { res in
+                                        switch res {
+                                            
+                                        case .success():
+                                            print("Successfully retrieved playlists.")
+                                            
+                                        case .failure(let error):
+                                            print(error)
+                                            
+                                            switch error {
+                                                
+                                            case SpotifyError.unauthorized:
+                                                errorMessage = "Error authorizing your account. Please log back in."
+                                                showError = true
+                                                authError = true
+                                                
+                                            case SpotifyError.badReq:
+                                                errorMessage = "Invalid Request"
+                                                showError = true
+                                                
+                                            case SpotifyError.oathError:
+                                                errorMessage = "OATH2.0 Error. Please log back in."
+                                                showError = true
+                                                authError = true
+                                                
+                                            case SpotifyError.notFound:
+                                                errorMessage = "User not found"
+                                                showError = true
+                                                authError = true
+                                                
+                                            case SpotifyError.rateLimit:
+                                                errorMessage = "Servers are busy. Come back later"
+                                                showError = true
+                                                
+                                            default:
+                                                errorMessage = "Unknown error occured"
+                                                showError = true
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            case .failure(let error):
+                                print(error)
+                                
+                                switch error {
+                                    
+                                case SpotifyError.unauthorized:
+                                    errorMessage = "Error authorizing your account. Please log back in."
+                                    showError = true
+                                    authError = true
+                                    
+                                case SpotifyError.badReq:
+                                    errorMessage = "Invalid Request"
+                                    showError = true
+                                    
+                                case SpotifyError.oathError:
+                                    errorMessage = "OATH2.0 Error. Please log back in."
+                                    showError = true
+                                    authError = true
+                                    
+                                case SpotifyError.notFound:
+                                    errorMessage = "User not found"
+                                    showError = true
+                                    authError = true
+                                    
+                                case SpotifyError.rateLimit:
+                                    errorMessage = "Servers are busy. Come back later"
+                                    showError = true
+                                    
+                                default:
+                                    errorMessage = "Unknown error occured"
+                                    showError = true
+                                }
+                            }
+                        }
+                    }
+                }
+                songViewModel.songs.removeLast()
             }
             
             offset = .zero
