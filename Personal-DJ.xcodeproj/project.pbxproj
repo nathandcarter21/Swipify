@@ -29,6 +29,7 @@
 		589127D82A0F065500CA0B0C /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D72A0F065500CA0B0C /* SignInViewModel.swift */; };
 		589127DA2A0F0BCF00CA0B0C /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D92A0F0BCF00CA0B0C /* Audio.swift */; };
 		589127DC2A0F0E2600CA0B0C /* SongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */; };
+		58CF541A2A1D7F4700532287 /* SwipeRightToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CF54192A1D7F4700532287 /* SwipeRightToast.swift */; };
 		58DECE692A131C3800142906 /* TopSongsRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DECE682A131C3800142906 /* TopSongsRes.swift */; };
 		58DECE6B2A131EC700142906 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DECE6A2A131EC700142906 /* Album.swift */; };
 		58DECE6D2A131FBD00142906 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DECE6C2A131FBD00142906 /* APIError.swift */; };
@@ -66,6 +67,7 @@
 		589127D72A0F065500CA0B0C /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		589127D92A0F0BCF00CA0B0C /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewModel.swift; sourceTree = "<group>"; };
+		58CF54192A1D7F4700532287 /* SwipeRightToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeRightToast.swift; sourceTree = "<group>"; };
 		58DECE682A131C3800142906 /* TopSongsRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSongsRes.swift; sourceTree = "<group>"; };
 		58DECE6A2A131EC700142906 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		58DECE6C2A131FBD00142906 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		589127C12A0ED24A00CA0B0C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58CF54162A1D7EFE00532287 /* Toasts */,
 				589127CF2A0F04EB00CA0B0C /* ViewSwitcher.swift */,
 				589127CD2A0F03FD00CA0B0C /* SignInView.swift */,
 				589127C22A0ED26D00CA0B0C /* HomeView.swift */,
@@ -200,6 +203,14 @@
 				58E526EF2A11AA61006535FB /* PlaylistViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		58CF54162A1D7EFE00532287 /* Toasts */ = {
+			isa = PBXGroup;
+			children = (
+				58CF54192A1D7F4700532287 /* SwipeRightToast.swift */,
+			);
+			path = Toasts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				589127D62A0F05AF00CA0B0C /* AccessTokenRes.swift in Sources */,
+				58CF541A2A1D7F4700532287 /* SwipeRightToast.swift in Sources */,
 				58DECE732A13226D00142906 /* Playlist.swift in Sources */,
 				589127C52A0ED27E00CA0B0C /* SongView.swift in Sources */,
 				589127D02A0F04EB00CA0B0C /* ViewSwitcher.swift in Sources */,
