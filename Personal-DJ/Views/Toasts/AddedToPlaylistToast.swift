@@ -1,5 +1,5 @@
 //
-//  SwipeRightToast.swift
+//  AddedToPlaylistToast.swift
 //  Personal-DJ
 //
 //  Created by Nathan Carter on 5/23/23.
@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct SwipeRightToast: View {
+struct AddedToPlaylistToast: View {
     
-    @Binding var showAddedToPersonalPicksToast: Bool
+    @Binding var showAddedToPlaylistToast: Bool
+    @Binding var playlistName: String
     
     var body: some View {
-        
+
         ZStack {
             Image(systemName: "text.badge.checkmark")
                 .resizable()
@@ -20,7 +21,7 @@ struct SwipeRightToast: View {
                 .foregroundColor(Color.black.opacity(0.4))
                 .offset(y: -10)
             
-            Text("Personal Picks")
+            Text(playlistName)
                 .offset(y: 70)
                 .foregroundColor(Color.black.opacity(0.4))
             
@@ -33,16 +34,19 @@ struct SwipeRightToast: View {
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 withAnimation() {
-                    showAddedToPersonalPicksToast = false
+                    showAddedToPlaylistToast = false
                 }
             }
         }
+        
     }
 }
 
-struct SwipeRightToast_Previews: PreviewProvider {
+struct AddedToPlaylistToast_Previews: PreviewProvider {
     @State static var val = false
+    @State static var name = "Chillax"
+
     static var previews: some View {
-        SwipeRightToast(showAddedToPersonalPicksToast: $val)
+        AddedToPlaylistToast(showAddedToPlaylistToast: $val, playlistName: $name)
     }
 }

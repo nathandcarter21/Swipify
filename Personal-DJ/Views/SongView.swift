@@ -12,7 +12,13 @@ struct SongView: View {
     @State var isEnded = false
     @State var isHearted = false
     @State var currSong: Song?
+    
     @State var showAddedToPersonalPicksToast = false
+    @State var showAddedToPlaylistToast = false
+    @State var playlistName = ""
+    @State var showLikedToast = false
+    @State var showUnlikedToast = false
+    
     @State var showError = false
     @State var errorMessage = ""
     @State var authError = false
@@ -267,13 +273,20 @@ struct SongView: View {
                 }
                 .overlay {
                     if showAddedToPersonalPicksToast {
-                        
                         SwipeRightToast(showAddedToPersonalPicksToast: $showAddedToPersonalPicksToast)
-                        
+                    }
+                    if showAddedToPlaylistToast {
+                        AddedToPlaylistToast(showAddedToPlaylistToast: $showAddedToPlaylistToast, playlistName: $playlistName)
+                    }
+                    if showLikedToast {
+                        LikedToast(showLikedToast: $showLikedToast)
+                    }
+                    if showUnlikedToast {
+                        UnlikedToast(showUnlikedToast: $showUnlikedToast)
                     }
                 }
                 
-            ActionsView(showError: $showError, errorMessage: $errorMessage, authError: $authError, currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: audio, auth: auth)
+            ActionsView(showAddedToPlaylistToast: $showAddedToPlaylistToast, playlistName: $playlistName, showLikedToast: $showLikedToast, showUnlikedToast: $showUnlikedToast, showError: $showError, errorMessage: $errorMessage, authError: $authError, currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: audio, auth: auth)
             
         }
         

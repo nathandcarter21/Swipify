@@ -14,7 +14,10 @@ struct PlaylistView: View {
 
     @Binding var showPlaylists: Bool
     @Binding var currSong: Song?
+    
     @Binding var showAddedToPlaylistToast: Bool
+    @Binding var playlistName: String
+    
     @Binding var showError: Bool
     @Binding var errorMessage: String
     @Binding var authError: Bool
@@ -58,6 +61,7 @@ struct PlaylistView: View {
                                         case .success():
                                             withAnimation {
                                                 showPlaylists.toggle()
+                                                playlistName = playlist.name
                                                 showAddedToPlaylistToast = true
                                             }
                                             
@@ -152,7 +156,8 @@ struct PlaylistView_Previews: PreviewProvider {
         @State var showError = false
         @State var errorMessage = ""
         @State var authError = false
+        @State var playlistName = "Chillax"
         
-        PlaylistView(auth: Auth(), showPlaylists: $show, currSong: $currSong, showAddedToPlaylistToast: $toast, showError: $showError, errorMessage: $errorMessage, authError: $authError)
+        PlaylistView(auth: Auth(), showPlaylists: $show, currSong: $currSong, showAddedToPlaylistToast: $toast, playlistName: $playlistName, showError: $showError, errorMessage: $errorMessage, authError: $authError)
     }
 }

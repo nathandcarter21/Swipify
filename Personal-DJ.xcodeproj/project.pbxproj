@@ -41,6 +41,9 @@
 		58E526EA2A119F99006535FB /* UserPlaylistsRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E526E92A119F99006535FB /* UserPlaylistsRes.swift */; };
 		58E526EE2A11A458006535FB /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E526ED2A11A458006535FB /* PlaylistView.swift */; };
 		58E526F02A11AA61006535FB /* PlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E526EF2A11AA61006535FB /* PlaylistViewModel.swift */; };
+		58F45A382A1DB55700F5C1E6 /* AddedToPlaylistToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F45A372A1DB55700F5C1E6 /* AddedToPlaylistToast.swift */; };
+		58F45A3A2A1DBF4D00F5C1E6 /* LikedToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F45A392A1DBF4D00F5C1E6 /* LikedToast.swift */; };
+		58F45A3C2A1DC05E00F5C1E6 /* UnlikedToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F45A3B2A1DC05E00F5C1E6 /* UnlikedToast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +82,9 @@
 		58E526E92A119F99006535FB /* UserPlaylistsRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlaylistsRes.swift; sourceTree = "<group>"; };
 		58E526ED2A11A458006535FB /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		58E526EF2A11AA61006535FB /* PlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewModel.swift; sourceTree = "<group>"; };
+		58F45A372A1DB55700F5C1E6 /* AddedToPlaylistToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedToPlaylistToast.swift; sourceTree = "<group>"; };
+		58F45A392A1DBF4D00F5C1E6 /* LikedToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedToast.swift; sourceTree = "<group>"; };
+		58F45A3B2A1DC05E00F5C1E6 /* UnlikedToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlikedToast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,9 @@
 			isa = PBXGroup;
 			children = (
 				58CF54192A1D7F4700532287 /* SwipeRightToast.swift */,
+				58F45A372A1DB55700F5C1E6 /* AddedToPlaylistToast.swift */,
+				58F45A392A1DBF4D00F5C1E6 /* LikedToast.swift */,
+				58F45A3B2A1DC05E00F5C1E6 /* UnlikedToast.swift */,
 			);
 			path = Toasts;
 			sourceTree = "<group>";
@@ -289,6 +298,7 @@
 				589127C52A0ED27E00CA0B0C /* SongView.swift in Sources */,
 				589127D02A0F04EB00CA0B0C /* ViewSwitcher.swift in Sources */,
 				589127CE2A0F03FD00CA0B0C /* SignInView.swift in Sources */,
+				58F45A3C2A1DC05E00F5C1E6 /* UnlikedToast.swift in Sources */,
 				58673B012A116A5F00B2829B /* ActionsViewModel.swift in Sources */,
 				58673AFB2A115B7E00B2829B /* User.swift in Sources */,
 				58673AFF2A1168F000B2829B /* SaveSongReq.swift in Sources */,
@@ -308,6 +318,8 @@
 				589127D82A0F065500CA0B0C /* SignInViewModel.swift in Sources */,
 				58E526EE2A11A458006535FB /* PlaylistView.swift in Sources */,
 				589127DC2A0F0E2600CA0B0C /* SongViewModel.swift in Sources */,
+				58F45A3A2A1DBF4D00F5C1E6 /* LikedToast.swift in Sources */,
+				58F45A382A1DB55700F5C1E6 /* AddedToPlaylistToast.swift in Sources */,
 				589127CA2A0ED6E100CA0B0C /* Song.swift in Sources */,
 				58DECE6B2A131EC700142906 /* Album.swift in Sources */,
 				5840E25D2A1883D000959819 /* RecommendedSongsRes.swift in Sources */,

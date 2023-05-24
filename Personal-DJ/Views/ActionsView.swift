@@ -11,11 +11,13 @@ struct ActionsView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    @State var showLikedToast = false
-    @State var showUnlikedToast = false
-    @State var showPlaylists = false
-    @State var showAddedToPlaylistToast = false
     
+    @State var showPlaylists = false
+    
+    @Binding var showAddedToPlaylistToast: Bool
+    @Binding var playlistName: String
+    @Binding var showLikedToast: Bool
+    @Binding var showUnlikedToast: Bool
     @Binding var showError: Bool
     @Binding var errorMessage: String
     @Binding var authError: Bool
@@ -34,6 +36,20 @@ struct ActionsView: View {
         ZStack {
             
             HStack {
+                
+                Button {
+                    showPlaylists = true
+                } label: {
+                    Image(systemName: "text.badge.plus")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                        .padding(.leading, 10)
+                    
+                }
+                
+                Spacer()
+
                 
                 if isEnded {
                     Button {
@@ -60,9 +76,9 @@ struct ActionsView: View {
                         isPaused.toggle()
                         
                     } label: {
-                        Image(systemName: isPaused ? "play.circle" : "pause.circle")
+                        Image(systemName: isPaused ? "play" : "pause")
                             .resizable()
-                            .frame(width: 30, height: 30)
+                            .frame(width: 25, height: 30)
                             .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                     }
                     
@@ -174,21 +190,9 @@ struct ActionsView: View {
                         }
                     }
                 } label: {
-                    Image(systemName: isHearted ? "heart.fill" : "heart")
+                    Image(isHearted ? "heart-64": "heart-64")
                         .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
-                    
-                }
-                
-                Spacer()
-                
-                Button {
-                    showPlaylists = true
-                } label: {
-                    Image(systemName: "text.badge.plus")
-                        .resizable()
-                        .frame(width: 30, height: 30)
+                        .frame(width: 40, height: 40)
                         .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                     
                 }
@@ -196,65 +200,10 @@ struct ActionsView: View {
             }
             .frame(maxWidth: 250)
             .padding(20)
-            
-            if showLikedToast {
-                
-                Text("Added to Liked Songs")
-                    .padding()
-                    .background(Color("AppGray"))
-                    .opacity(0.8)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.white)
-                    .offset(y: -50)
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
-                                showLikedToast = false
-                            }
-                        }
-                    }
-                
-            }
-            
-            if showUnlikedToast {
-                
-                Text("Removed from Liked Songs")
-                    .padding()
-                    .background(Color("AppGray"))
-                    .opacity(0.8)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.white)
-                    .offset(y: -50)
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
-                                showUnlikedToast = false
-                            }
-                        }
-                    }
-            }
-            
-            if showAddedToPlaylistToast {
-                
-                Text("Added to playlist")
-                    .padding()
-                    .background(Color("AppGray"))
-                    .opacity(0.8)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.white)
-                    .offset(y: -50)
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
-                                showAddedToPlaylistToast = false
-                            }
-                        }
-                    }
-            }
         }
         
         .sheet(isPresented: $showPlaylists) {
-            PlaylistView(auth: auth, showPlaylists: $showPlaylists, currSong: $currSong, showAddedToPlaylistToast: $showAddedToPlaylistToast, showError: $showError, errorMessage: $errorMessage, authError: $authError)
+            PlaylistView(auth: auth, showPlaylists: $showPlaylists, currSong: $currSong, showAddedToPlaylistToast: $showAddedToPlaylistToast, playlistName: $playlistName, showError: $showError, errorMessage: $errorMessage, authError: $authError)
         }
         
     }
@@ -270,8 +219,12 @@ struct Actions_Previews: PreviewProvider {
         @State var showError = false
         @State var errorMessage = ""
         @State var authError = false
+        @State var playlistName = ""
+        @State var showtoast = true
+        @State var showLiked = false
+        @State var showUnliked = false
 
-        ActionsView(showError: $showError, errorMessage: $errorMessage, authError: $authError, currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: Audio(), auth: Auth())
+        ActionsView(showAddedToPlaylistToast: $showtoast, playlistName: $playlistName, showLikedToast: $showLiked, showUnlikedToast: $showUnliked, showError: $showError, errorMessage: $errorMessage, authError: $authError, currSong: $currSong, isPaused: $isPaused, isEnded: $isEnded, isHearted: $isHearted, audio: Audio(), auth: Auth())
 
     }
 }
