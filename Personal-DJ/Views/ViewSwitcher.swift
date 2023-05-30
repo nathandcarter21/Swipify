@@ -10,6 +10,8 @@ import SwiftUI
 struct ViewSwitcher: View {
     
     @StateObject var auth = Auth()
+    @State var showOnboarding = true
+    @AppStorage("onboarded") var onboarded = false
     
     var body: some View {
                 
@@ -17,10 +19,22 @@ struct ViewSwitcher: View {
             SignInView(
                 auth: auth
             )
+            .onAppear {
+                onboarded = false
+                showOnboarding = true
+            }
         }
         
         else {
-            HomeView(auth: auth)
+            if showOnboarding && !onboarded {
+                OnboardingView(showOnboarding: $showOnboarding)
+            }
+            else {
+                HomeView(auth: auth)
+                    .onAppear {
+                        onboarded = true
+                    }
+            }
         }
     }
 }

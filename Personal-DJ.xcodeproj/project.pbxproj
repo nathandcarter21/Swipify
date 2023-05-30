@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		580FD5B82A269BB10055160A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FD5B72A269BB10055160A /* OnboardingView.swift */; };
 		5840E25D2A1883D000959819 /* RecommendedSongsRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5840E25C2A1883D000959819 /* RecommendedSongsRes.swift */; };
 		58620F6A2A1729170098F35A /* SpotifyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58620F692A1729170098F35A /* SpotifyError.swift */; };
 		58673AFB2A115B7E00B2829B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58673AFA2A115B7E00B2829B /* User.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		580FD5B72A269BB10055160A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		5840E25C2A1883D000959819 /* RecommendedSongsRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSongsRes.swift; sourceTree = "<group>"; };
 		58620F692A1729170098F35A /* SpotifyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyError.swift; sourceTree = "<group>"; };
 		58673AFA2A115B7E00B2829B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				589127C42A0ED27E00CA0B0C /* SongView.swift */,
 				589127C62A0ED29D00CA0B0C /* ActionsView.swift */,
 				58E526ED2A11A458006535FB /* PlaylistView.swift */,
+				580FD5B72A269BB10055160A /* OnboardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				589127DA2A0F0BCF00CA0B0C /* Audio.swift in Sources */,
 				589127CC2A0EE28800CA0B0C /* SettingsView.swift in Sources */,
 				588C1EDD2A1C344300035FC1 /* CreatePlaylistRes.swift in Sources */,
+				580FD5B82A269BB10055160A /* OnboardingView.swift in Sources */,
 				588C1EDB2A1C33D800035FC1 /* CreatePlaylistReq.swift in Sources */,
 				589127B42A0ED19400CA0B0C /* App.swift in Sources */,
 				589127D82A0F065500CA0B0C /* SignInViewModel.swift in Sources */,
