@@ -190,9 +190,9 @@ struct ActionsView: View {
                         }
                     }
                 } label: {
-                    Image(isHearted ? "heart-64": "heart-64")
+                    Image(systemName: isHearted ? "heart.fill" : "heart")
                         .resizable()
-                        .frame(width: 40, height: 40)
+                        .frame(width: 30, height: 30)
                         .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                     
                 }

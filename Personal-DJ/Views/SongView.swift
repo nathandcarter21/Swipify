@@ -213,10 +213,19 @@ struct SongView: View {
                                     
                                     Button {
                                         
-                                        if let uri = URL(string: song.uri) {
+                                        if isSpotifyInstalled() {
                                             
-                                            UIApplication.shared.open(uri)
-                                            
+                                            if let uri = URL(string: song.uri) {
+                                                
+                                                UIApplication.shared.open(uri)
+                                                
+                                            }
+                                        }
+                                        
+                                        else {
+                                            if let uri = URL(string: "https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580") {
+                                                UIApplication.shared.open(uri)
+                                            }
                                         }
                                         
                                     } label: {
