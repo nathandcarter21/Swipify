@@ -11,7 +11,7 @@ class Auth: ObservableObject {
     
     let client = "815d77f6e74645738bf81edb150d456e"
     var codeVerifier: String?
-    var url = "https://accounts.spotify.com/authorize?response_type=code&client_id=815d77f6e74645738bf81edb150d456e&scope=user-top-read,user-read-private,user-read-email,user-library-read,user-library-modify,playlist-modify-public,playlist-modify-private&redirect_uri=https://github.com/nathandcarter21&code_challenge_method=S256&code_challenge="
+    var url = "https://accounts.spotify.com/authorize?response_type=code&client_id=815d77f6e74645738bf81edb150d456e&scope=user-top-read,user-read-email,user-library-read,user-library-modify,playlist-modify-public,playlist-modify-private&redirect_uri=https://github.com/nathandcarter21&code_challenge_method=S256&code_challenge="
     
     func getAccessToken() async -> String? {        
         let now = Date()

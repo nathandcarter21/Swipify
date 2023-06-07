@@ -59,7 +59,7 @@ struct SettingsView: View {
             
             VStack(spacing: 0) {
                 
-                NavigationLink(destination: Text("About")) {
+                NavigationLink(destination: AboutView()) {
                     
                     Text("About")
                         .padding(.leading, 20)
@@ -75,7 +75,7 @@ struct SettingsView: View {
                 Divider()
                     .overlay(Color.white)
                 
-                NavigationLink(destination: Text("Contact")) {
+                NavigationLink(destination: ContactView()) {
                     
                     Text("Contact")
                         .padding(.leading, 20)
@@ -90,7 +90,7 @@ struct SettingsView: View {
                 Divider()
                     .overlay(Color.white)
                 
-                NavigationLink(destination: Text("Privacy")) {
+                NavigationLink(destination: PrivacyView()) {
                     
                     Text("Privacy")
                         .padding(.leading, 20)
@@ -104,6 +104,8 @@ struct SettingsView: View {
                 
             }
             .cornerRadius(10)
+            
+            Spacer()
             
             Button(action: {
 
@@ -119,7 +121,6 @@ struct SettingsView: View {
                     .background(Color.red)
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
-                    .padding(.top, 75)
             })
             
         }

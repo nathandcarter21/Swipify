@@ -221,7 +221,7 @@ struct SongView: View {
                                         
                                     } label: {
                                         
-                                        Text("Listen On Spotify")
+                                        Text(isSpotifyInstalled() ? "Listen On Spotify" : "Download Spotify")
                                             .frame(width: 300, height: 60)
                                             .background(Color("Spotify"))
                                             .cornerRadius(10)
@@ -444,6 +444,14 @@ struct SongView: View {
                 )
             )
         }
+    }
+    
+    func isSpotifyInstalled() -> Bool {
+        guard let url = URL(string: "spotify://") else {
+            return false
+        }
+        
+        return UIApplication.shared.canOpenURL(url)
     }
     
     func handleSwipe() {
