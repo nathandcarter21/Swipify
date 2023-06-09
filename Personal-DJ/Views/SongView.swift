@@ -49,31 +49,6 @@ struct SongView: View {
                             
                             VStack {
                                 
-                                if index == songViewModel.songs.count - 1 && showInfo {
-                                    
-                                    HStack {
-                                        
-                                        Button {
-                                            
-                                            withAnimation {
-                                                showInfo.toggle()
-                                            }
-                                            
-                                        } label: {
-                                            
-                                            Image(systemName: "xmark")
-                                                .resizable()
-                                                .frame(width: 20, height: 20)
-                                            
-                                        }
-                                        .buttonStyle(.plain)
-                                        .offset(x: 180, y: 23)
-                                        
-                                    }
-                                    .frame(height: 0)
-                                    
-                                }
-                                
                                 if index == songViewModel.songs.count - 1 {
                                     
                                     HStack {
@@ -185,7 +160,7 @@ struct SongView: View {
                                             
                                         }
                                         
-                                        Text("\(song.popularity ?? 50)")
+                                        Text("\(song.popularity ?? 50) / 100")
                                             .font(.system(size: 20))
                                         
                                     }
@@ -203,7 +178,7 @@ struct SongView: View {
                                             
                                         }
                                         
-                                        Text(song.album.release_date ?? "never")
+                                        Text(songReleaseDate(album: song.album))
                                             .font(.system(size: 20))
                                         
                                     }
@@ -453,6 +428,40 @@ struct SongView: View {
                 )
             )
         }
+    }
+    
+    func songReleaseDate(album: Album) -> String {
+        guard let releaseDate = album.release_date, let precision = album.release_date_precision else {
+            return "Unknown"
+        }
+        
+        var dataInfo = releaseDate.split(separator: "-")
+        
+        if precision == "year" && dataInfo.count == 1 {
+            return String(dataInfo[0])
+        }
+        
+        guard dataInfo.count >= 2 else { return "Unknown" }
+        
+        if dataInfo[1].hasPrefix("0") {
+            dataInfo[1] = dataInfo[1].dropFirst()
+        }
+        
+        if precision == "month" && dataInfo.count == 2 {
+            return dataInfo[1] + "/" + dataInfo[0]
+        }
+        
+        guard dataInfo.count >= 3 else { return "Unknown" }
+        
+        if dataInfo[2].hasPrefix("0") {
+            dataInfo[2] = dataInfo[2].dropFirst()
+        }
+        
+        if precision == "day" && dataInfo.count == 3 {
+            return dataInfo[1] + "/" + dataInfo[2] + "/" + dataInfo[0]
+        }
+        
+        return "Unknown"
     }
     
     func isSpotifyInstalled() -> Bool {

@@ -18,7 +18,7 @@ struct SignInView: View {
     
     var body: some View {
         VStack {
-            Text("Welcome")
+            Text("Welcome to Personal DJ")
                 .font(.system(size:24,weight:.semibold, design: .monospaced))
                 .fontWeight(.light)
             
