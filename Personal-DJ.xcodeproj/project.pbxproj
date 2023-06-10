@@ -33,6 +33,7 @@
 		589127D82A0F065500CA0B0C /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D72A0F065500CA0B0C /* SignInViewModel.swift */; };
 		589127DA2A0F0BCF00CA0B0C /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127D92A0F0BCF00CA0B0C /* Audio.swift */; };
 		589127DC2A0F0E2600CA0B0C /* SongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */; };
+		58B5110B2A3436C9009C32AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58B5110A2A3436C9009C32AE /* LaunchScreen.storyboard */; };
 		58CF541A2A1D7F4700532287 /* SwipeRightToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CF54192A1D7F4700532287 /* SwipeRightToast.swift */; };
 		58DECE692A131C3800142906 /* TopSongsRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DECE682A131C3800142906 /* TopSongsRes.swift */; };
 		58DECE6B2A131EC700142906 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DECE6A2A131EC700142906 /* Album.swift */; };
@@ -79,6 +80,7 @@
 		589127D72A0F065500CA0B0C /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		589127D92A0F0BCF00CA0B0C /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		589127DB2A0F0E2500CA0B0C /* SongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewModel.swift; sourceTree = "<group>"; };
+		58B5110A2A3436C9009C32AE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58CF54192A1D7F4700532287 /* SwipeRightToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeRightToast.swift; sourceTree = "<group>"; };
 		58DECE682A131C3800142906 /* TopSongsRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSongsRes.swift; sourceTree = "<group>"; };
 		58DECE6A2A131EC700142906 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				580702B92A313F2500EF7A27 /* AboutView.swift */,
 				580702BB2A313F3100EF7A27 /* ContactView.swift */,
 				580702BD2A313F3C00EF7A27 /* PrivacyView.swift */,
+				58B5110A2A3436C9009C32AE /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58B5110B2A3436C9009C32AE /* LaunchScreen.storyboard in Resources */,
 				589127BB2A0ED19500CA0B0C /* Preview Assets.xcassets in Resources */,
 				589127B82A0ED19500CA0B0C /* Assets.xcassets in Resources */,
 			);
@@ -482,6 +486,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -518,6 +523,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
