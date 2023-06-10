@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct ActionsView: View {
-    
-    @Environment(\.colorScheme) var colorScheme
-    
-    
+        
     @State var showPlaylists = false
     
     @Binding var showAddedToPlaylistToast: Bool
@@ -43,7 +40,7 @@ struct ActionsView: View {
                     Image(systemName: "text.badge.plus")
                         .resizable()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                        .foregroundColor(Color.primary)
                         .padding(.leading, 10)
                     
                 }
@@ -59,7 +56,7 @@ struct ActionsView: View {
                         Image(systemName: "repeat")
                             .resizable()
                             .frame(width: 30, height: 30)
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                            .foregroundColor(Color.primary)
                     }
                 }
                 
@@ -79,7 +76,7 @@ struct ActionsView: View {
                         Image(systemName: isPaused ? "play" : "pause")
                             .resizable()
                             .frame(width: 25, height: 30)
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                            .foregroundColor(Color.primary)
                     }
                     
                 }
@@ -193,7 +190,7 @@ struct ActionsView: View {
                     Image(systemName: isHearted ? "heart.fill" : "heart")
                         .resizable()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                        .foregroundColor(Color.primary)
                     
                 }
                 

@@ -152,16 +152,15 @@ struct SongView: View {
                                     
                                     HStack(spacing: 0) {
                                         
-                                        if showInfo {
+                                        if showInfo && isSpace() {
                                             
                                             Text("Popularity - ")
                                                 .bold()
                                                 .font(.system(size: 20))
                                             
+                                            Text("\(song.popularity ?? 50) / 100")
+                                                .font(.system(size: 20))
                                         }
-                                        
-                                        Text("\(song.popularity ?? 50) / 100")
-                                            .font(.system(size: 20))
                                         
                                     }
                                     .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
@@ -170,16 +169,15 @@ struct SongView: View {
                                     
                                     HStack(spacing: 0) {
                                         
-                                        if showInfo {
+                                        if showInfo && isSpace() {
                                             
                                             Text("Release Date - ")
                                                 .bold()
                                                 .font(.system(size: 20))
                                             
+                                            Text(songReleaseDate(album: song.album))
+                                                .font(.system(size: 20))
                                         }
-                                        
-                                        Text(songReleaseDate(album: song.album))
-                                            .font(.system(size: 20))
                                         
                                     }
                                     .frame(maxWidth: 300, alignment: showInfo ? .leading : .trailing)
@@ -206,7 +204,7 @@ struct SongView: View {
                                     } label: {
                                         
                                         Text(isSpotifyInstalled() ? "Listen On Spotify" : "Download Spotify")
-                                            .frame(width: 300, height: 60)
+                                            .frame(width: 300, height: isSpace() ? 60 : 40)
                                             .background(Color("Spotify"))
                                             .cornerRadius(10)
                                             .foregroundColor(Color.white)
@@ -430,6 +428,13 @@ struct SongView: View {
         }
     }
     
+    func isSpace() -> Bool {
+        if UIScreen.main.bounds.size.height <= 700 {
+            return false
+        }
+        return true
+    }
+    
     func songReleaseDate(album: Album) -> String {
         guard let releaseDate = album.release_date, let precision = album.release_date_precision else {
             return "Unknown"
@@ -651,16 +656,13 @@ struct SongView: View {
     }
 }
 
-//struct Song_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        SongView(
-//            songs: [
-//                Song(id: "12345", href: "www.google.com", name: "notre dame 1 ", popularity: 61, preview_url: "https://p.scdn.co/mp3-preview/8d9301f275ffb5a4128ab7a268d0fd90bc4518a1?cid=0b297fa8a249464ba34f5861d4140e58", uri: "spotify:track:4ni2PRjuIORNFXvWB74SqX", is_local: false, album: Album(id: "12345", album_type: "SINGLE", name: "notre dame", release_date: "2023-02-17", release_date_precision: "day", images: [AlbumImage(height: 300, width: 300, url: "https://i.scdn.co/image/ab67616d0000b2735c8bb06b717da13d4c37cae4")], artists: [Artist(id: "12345", name: "Paris Paloma")])),
-//                Song(id: "12345", href: "www.google.com", name: "banana pancakes 2 ", popularity: 61, preview_url: "https://p.scdn.co/mp3-preview/8d9301f275ffb5a4128ab7a268d0fd90bc4518a1?cid=0b297fa8a249464ba34f5861d4140e58", uri: "spotify:track:4ni2PRjuIORNFXvWB74SqX", is_local: false, album: Album(id: "12345", album_type: "SINGLE", name: "notre dame", release_date: "2023-02-17", release_date_precision: "day", images: [AlbumImage(height: 300, width: 300, url: "https://i.scdn.co/image/ab67616d0000b2735c8bb06b717da13d4c37cae4")], artists: [Artist(id: "12345", name: "Paris Paloma")])),
-//                Song(id: "12345", href: "www.google.com", name: "better 3", popularity: 61, preview_url: "https://p.scdn.co/mp3-preview/8d9301f275ffb5a4128ab7a268d0fd90bc4518a1?cid=0b297fa8a249464ba34f5861d4140e58", uri: "spotify:track:4ni2PRjuIORNFXvWB74SqX", is_local: false, album: Album(id: "12345", album_type: "SINGLE", name: "notre dame", release_date: "2023-02-17", release_date_precision: "day", images: [AlbumImage(height: 300, width: 300, url: "https://i.scdn.co/image/ab67616d0000b2735c8bb06b717da13d4c37cae4")], artists: [Artist(id: "12345", name: "Paris Paloma")]))
-//            ]
-//        )
-//
-//    }
-//}
+struct Song_Previews: PreviewProvider {
+    static var previews: some View {
+
+        SongView(
+            audio: Audio(),
+            auth: Auth()
+        )
+
+    }
+}
