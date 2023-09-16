@@ -20,7 +20,7 @@ class SongViewModel: ObservableObject {
         if let playlists = playlists {
                         
             for playlist in playlists {
-                if playlist.name == "Personal Picks" {
+                if playlist.name == "Swipify" {
                     addSongToPlaylist(token: token, song: song, playlist: playlist.id, newPlaylist: false, completion: completion) 
                     return
                 }

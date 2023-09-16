@@ -12,7 +12,7 @@ struct OnboardingView: View {
     @Binding var showOnboarding: Bool
 
     private let icons: [Image] = [Image(systemName: "arrow.forward"), Image(systemName: "arrow.backward"), Image("heart-64"), Image(systemName: "text.badge.plus")]
-    private let actions: [String] = ["Swipe right to add a song to your Personal Picks playlist", "Swipe left to skip a song", "Add songs to your liked songs", "Add songs to your playlists"]
+    private let actions: [String] = ["Swipe right to add a song to your Swipify playlist", "Swipe left to skip a song", "Add songs to your liked songs", "Add songs to your playlists"]
     
     var body: some View {
         ZStack {
@@ -26,7 +26,7 @@ struct OnboardingView: View {
                         ZStack {
                             
                             if i == 0 {
-                                Text("Welcome to Personal DJ!")
+                                Text("Welcome to Swipify!")
                                     .offset(y: -350)
                                     .font(.headline)
                             }

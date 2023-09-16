@@ -158,7 +158,7 @@ struct SongView: View {
                                                 .bold()
                                                 .font(.system(size: 20))
                                             
-                                            Text("\(song.popularity ?? 50) / 100")
+                                            Text("\(song.popularity ?? 50)")
                                                 .font(.system(size: 20))
                                         }
                                         

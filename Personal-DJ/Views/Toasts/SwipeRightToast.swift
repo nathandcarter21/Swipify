@@ -20,7 +20,7 @@ struct SwipeRightToast: View {
                 .foregroundColor(Color.black.opacity(0.4))
                 .offset(y: -10)
             
-            Text("Personal Picks")
+            Text("Swipify")
                 .offset(y: 70)
                 .foregroundColor(Color.black.opacity(0.4))
             

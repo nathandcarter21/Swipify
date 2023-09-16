@@ -8,6 +8,6 @@
 import SwiftUI
 
 class CreatePlaylistReq: Encodable {
-    var name: String = "Personal Picks"
-    var description: String = "Your handcrafted playlist from Personal DJ."
+    var name: String = "Swipify"
+    var description: String = "Your handcrafted playlist from Swipify."
 }

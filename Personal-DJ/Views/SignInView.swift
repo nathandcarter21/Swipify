@@ -18,9 +18,10 @@ struct SignInView: View {
     
     var body: some View {
         VStack {
-            Text("Welcome to Personal DJ")
+            Text("Welcome to Swipify")
                 .font(.system(size:24,weight:.semibold, design: .monospaced))
                 .fontWeight(.light)
+                .padding(.top, 20)
             
             Spacer()
             

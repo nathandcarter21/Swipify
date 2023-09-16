@@ -10,7 +10,7 @@ import SwiftUI
 struct ContactView: View {
     var body: some View {
         VStack(spacing: 20) {
-            Text("Personal DJ was created by")
+            Text("Swipify was created by")
             Text("Nathan Carter")
             Text("ndc922@byu.edu")
         }
