@@ -1,7 +1,18 @@
-# Personal-DJ
+# Swipify
+
+### An interactive music recommendation iOS app based on your top Spotify tracks
+<img
+  src="Images/welcome.png"
+  alt="Swipify Welcome View"
+  style="width: 300px">
+
+### Sign in to Spotify to get personalized recommendations to add songs to your playslists and library
 
 <img
-  src="IMG_7168.png"
-  alt="Alt text"
-  title="Optional title"
-  style="display: inline-block; margin: 0 auto; max-width: 100px">
+  src="Images/sign_in.png"
+  alt="Spotify Sign In"
+  style="width: 300px">
+
+### Swipe left or right on songs to skip or add them to your handcrafted Swipify playlist
+
+
