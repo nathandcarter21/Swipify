@@ -15,12 +15,12 @@
 
 ### Swipe left or right on songs to skip or add them to your handcrafted Swipify playlist
 
-![Song Swiping](https://github.com/nathandcarter21/Swipify/assets/97918203/ace4a958-2cfe-4242-9ad7-c1e1cc780dcb)
+![Swipe songs](https://github.com/nathandcarter21/Swipify/assets/97918203/9952a9c5-fbe4-4503-b6e3-0f0b21c5ba4e)
 
 ### Like songs or add them directly to your Spotify playlists
 
-![Adding to playlist](https://github.com/nathandcarter21/Swipify/assets/97918203/0308e23f-98fc-4366-8523-8eb0de754518)
+![Add to Playlist](https://github.com/nathandcarter21/Swipify/assets/97918203/0bae613f-25a6-43fa-b4a1-55130c1c0520)
 
 ### Log out of Swipify to give someone else a chance
 
-![Logging out](https://github.com/nathandcarter21/Swipify/assets/97918203/7bc04e39-82ac-48f2-aa7c-c2d0aca8a314)
+![Logging out](https://github.com/nathandcarter21/Swipify/assets/97918203/6407e17f-b0e2-4a9a-9d74-7702a4fe8eb2)
